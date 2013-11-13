@@ -17,4 +17,4 @@ SOURCES += main.cpp\
 
 HEADERS  += ui.h
 
-FORMS    += ui.ui
+FORMS    +=
