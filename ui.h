@@ -22,6 +22,7 @@ private:
      QMenu* aboutMenu; //меню "Справка" или что-то в этом роде
      QMenuBar* menuBar; //панель меню
      QLabel* creatorsLabel; //окошко "О создателях"
+     QLabel* aboutTheGameLabel;//окошко "Об игре"
 
 private slots:
      void newGame();
