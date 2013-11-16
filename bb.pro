@@ -14,7 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ui.cpp \
-    helper.cpp
+    helper.cpp \
+    gamemechanics.cpp
 
 HEADERS  += ui.h \
-    helper.h
+    helper.h \
+    gamemechanics.h
