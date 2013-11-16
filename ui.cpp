@@ -4,10 +4,10 @@
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setFixedSize(400,350);//устанавливаем размер окна
+    this->setFixedSize(400,350);
 
     Helper* helper = new Helper();
-    this->setCentralWidget(helper);//устанавливаем холст по центру
+    this->setCentralWidget(helper);
 
     GameMechanics* gameMechanics = new GameMechanics();
 
@@ -41,7 +41,13 @@ UI::UI(QWidget *parent)
     menuBar->addMenu(aboutMenu);
     this->setMenuBar(menuBar);
 
-
+    creatorsLabel = new QLabel(tr(
+                                   "<H1><CENTER>bb</CENTER></H1>"
+                                   "<H2><CENTER>Gem Puzzle</CENTER></H2>"
+                                   "<CENTER>The best of the best!</CENTER>"
+                                   "<CENTER>Very intresting game!</CENTER>"
+                                   "<CENTER>Creators: aizenbit && den5509</CENTER>"));
+    creatorsLabel->setFixedSize(180,130);
 }
 
 UI::~UI()
@@ -68,18 +74,5 @@ void UI::aboutTheGame()
 }
 void UI::creators()
 {
-    /*
-     *  К сожалению, я не понимаю, почему прога вываливается,
-     *  если расположить конструктор creatorsLabel в конструкторе ui,
-     *  поэтому пусть он пока побудет тут "до выяснения обстоятельств"
-     */
-    QLabel* creatorsLabel = new QLabel(tr(                                 
-               "<H1><CENTER>bb</CENTER></H1>"
-               "<H2><CENTER>Gem Puzzle</CENTER></H2>"
-               "<CENTER>The best of the best!</CENTER>"
-               "<CENTER>Very intresting game!</CENTER>"
-               "<CENTER>Creators: aizenbit && den5509</CENTER>"));
-
-    creatorsLabel->setFixedSize(180,130);
     creatorsLabel->show();
 }
