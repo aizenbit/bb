@@ -1,11 +1,9 @@
 #include "ui.h"
 
-
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setFixedSize(400,350);
-
     helper = new Helper();
     this->setCentralWidget(helper);
 
@@ -48,6 +46,7 @@ UI::UI(QWidget *parent)
                                    "<CENTER>Very intresting game!</CENTER>"
                                    "<CENTER>Creators: aizenbit && den5509</CENTER>"));
     creatorsLabel->setFixedSize(180,130);
+    creatorsLabel->setWindowTitle(tr("Creators"));
     aboutTheGameLabel = new QLabel(tr(
                                        "<H1><CENTER>bb</CENTER></H1>"
                                        "<H2><CENTER>Gem Puzzle</CENTER></H2>"
@@ -63,7 +62,11 @@ UI::UI(QWidget *parent)
                                        "                                                              (c) Wiki</pre>"
                                        ));
     aboutTheGameLabel->setFixedWidth(568);
+    aboutTheGameLabel->setWindowTitle(tr("About The Game"));
+
 }
+
+//-----------------------------------------
 
 UI::~UI()
 {
@@ -73,21 +76,35 @@ UI::~UI()
     delete gameMechanics;
     delete creatorsLabel;
 }
- void UI::newGame()
- {
 
- }
+//-----------------------------------------
 
- void UI::showImage()
- {
+void UI::newGame()
+{
+     //Пока что будет так.
+     QString imageName = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
+     gameMechanics->newGame(&imageName);
+}
 
- }
+//-----------------------------------------
+
+void UI::showImage()
+{
+
+}
+
+//-----------------------------------------
 
 void UI::aboutTheGame()
 {
     aboutTheGameLabel->show();
 }
+
+//-----------------------------------------
+
 void UI::creators()
 {
     creatorsLabel->show();
 }
+
+//-----------------------------------------

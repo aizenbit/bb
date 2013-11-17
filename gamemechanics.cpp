@@ -6,11 +6,18 @@ GameMechanics::GameMechanics(QObject *parent) :
 
 }
 
-void GameMechanics::newGame()
+//-----------------------------------------
+
+void GameMechanics::newGame(QString* imageName)
 {
 
 }
+
+//-----------------------------------------
+
 void GameMechanics::hint()
 {
 
 }
+
+//-----------------------------------------

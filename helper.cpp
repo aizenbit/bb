@@ -7,6 +7,8 @@ Helper::Helper(QWidget *parent) :
     repaint();
 }
 
+//-----------------------------------------
+
 void Helper::paintEvent(QPaintEvent *paintEvent)
 {
     QPainter painter(this);
@@ -14,3 +16,5 @@ void Helper::paintEvent(QPaintEvent *paintEvent)
     painter.drawText(12,12,"Это то место, где будет картинка");
     painter.end();
 }
+
+//-----------------------------------------

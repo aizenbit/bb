@@ -1,3 +1,6 @@
+/*
+ *  Главное окно программы
+ */
 #ifndef UI_H
 #define UI_H
 
@@ -6,12 +9,10 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
+#include <QFileDialog>
+
 #include "helper.h"
 #include "gamemechanics.h"
-
-/*
- *  Главное окно программы
- */
 
 class UI : public QMainWindow
 {
@@ -23,7 +24,6 @@ private:
      QMenuBar* menuBar; //панель меню
      QLabel* creatorsLabel; //окошко "О создателях"
      QLabel* aboutTheGameLabel;//окошко "Об игре"
-
 private slots:
      void newGame();
      void aboutTheGame();
