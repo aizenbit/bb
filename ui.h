@@ -13,6 +13,7 @@
 
 #include "helper.h"
 #include "gamemechanics.h"
+#include "newgamewidget.h"
 
 class UI : public QMainWindow
 {
@@ -24,18 +25,19 @@ private:
      QMenuBar* menuBar; //панель меню
      QLabel* creatorsLabel; //окошко "О создателях"
      QLabel* aboutTheGameLabel;//окошко "Об игре"
+     NewGameWidget* newGameWidget;//окошко "Новая игра"
+     Helper* helper; //"холст"
+     GameMechanics* gameMechanics;//основная механика игры. Пусть пока будет тут
+
 private slots:
      void newGame();
      void aboutTheGame();
      void creators();
      void showImage();
+
 public:
     UI(QWidget *parent = 0);
     ~UI();
-    Helper* helper; //"холст"
-
-    GameMechanics* gameMechanics;//основная механика игры. Пусть пока будет тут
-
 };
 
 #endif // UI_H

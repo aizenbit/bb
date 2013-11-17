@@ -4,7 +4,6 @@
 Helper::Helper(QWidget *parent) :
     QWidget(parent)
 {
-    repaint();
 }
 
 //-----------------------------------------

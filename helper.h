@@ -13,6 +13,7 @@ class Helper : public QWidget
 
 private:
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
+
 public:
     explicit Helper(QWidget *parent = 0);
 

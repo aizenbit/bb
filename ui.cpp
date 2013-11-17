@@ -7,38 +7,37 @@ UI::UI(QWidget *parent)
     helper = new Helper();
     this->setCentralWidget(helper);
 
+    //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
 
+    //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 
     gameMenu->addAction(tr("&New Game"),
                         this,
-                        SLOT(newGame()),
-                        Qt::CTRL + Qt::Key_N);
+                        SLOT(newGame()));
     gameMenu->addAction(tr("&Hint"),
                            gameMechanics,
-                           SLOT(hint()),
-                           Qt::CTRL + Qt::Key_H);
+                           SLOT(hint()));
     gameMenu->addAction(tr("Show &Image"),
                         this,
-                        SLOT(showImage()),
-                        Qt::CTRL + Qt::Key_I);
+                        SLOT(showImage()));
 
+    //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
-    aboutMenu->addAction(tr("About the &game"),
+    aboutMenu->addAction(tr("About the game"),
                         this,
-                        SLOT(aboutTheGame()),
-                        Qt::CTRL + Qt::Key_G);
-    aboutMenu->addAction(tr("&Creators"),
+                        SLOT(aboutTheGame()));
+    aboutMenu->addAction(tr("Creators"),
                         this,
-                        SLOT(creators()),
-                        Qt::CTRL + Qt::Key_C);
+                        SLOT(creators()));
 
+    //------------------menuBar----------------------
     menuBar = new QMenuBar();
     menuBar->addMenu(gameMenu);
     menuBar->addMenu(aboutMenu);
     this->setMenuBar(menuBar);
-
+    //creatorsLabel
     creatorsLabel = new QLabel(tr(
                                    "<H1><CENTER>bb</CENTER></H1>"
                                    "<H2><CENTER>Gem Puzzle</CENTER></H2>"
@@ -47,6 +46,8 @@ UI::UI(QWidget *parent)
                                    "<CENTER>Creators: aizenbit && den5509</CENTER>"));
     creatorsLabel->setFixedSize(180,130);
     creatorsLabel->setWindowTitle(tr("Creators"));
+
+    //------------------aboutTheGameLabel------------
     aboutTheGameLabel = new QLabel(tr(
                                        "<H1><CENTER>bb</CENTER></H1>"
                                        "<H2><CENTER>Gem Puzzle</CENTER></H2>"
@@ -63,6 +64,10 @@ UI::UI(QWidget *parent)
                                        ));
     aboutTheGameLabel->setFixedWidth(568);
     aboutTheGameLabel->setWindowTitle(tr("About The Game"));
+
+    //------------------newGameWidget----------------
+    newGameWidget = new NewGameWidget();
+
 
 }
 
@@ -82,8 +87,9 @@ UI::~UI()
 void UI::newGame()
 {
      //Пока что будет так.
-     QString imageName = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
-     gameMechanics->newGame(&imageName);
+     //QString imageName = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
+     //gameMechanics->newGame(&imageName);
+     newGameWidget->show();
 }
 
 //-----------------------------------------
