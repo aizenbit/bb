@@ -37,7 +37,8 @@ UI::UI(QWidget *parent)
     menuBar->addMenu(gameMenu);
     menuBar->addMenu(aboutMenu);
     this->setMenuBar(menuBar);
-    //creatorsLabel
+
+    //------------------creatorsLabel----------------
     creatorsLabel = new QLabel(tr(
                                    "<H1><CENTER>bb</CENTER></H1>"
                                    "<H2><CENTER>Gem Puzzle</CENTER></H2>"
@@ -66,7 +67,7 @@ UI::UI(QWidget *parent)
     aboutTheGameLabel->setWindowTitle(tr("About The Game"));
 
     //------------------newGameWidget----------------
-    newGameWidget = new NewGameWidget();
+    newGameWidget = new NewGameWidget(gameMechanics->imageName);
 
 
 }
@@ -86,9 +87,6 @@ UI::~UI()
 
 void UI::newGame()
 {
-     //Пока что будет так.
-     //QString imageName = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
-     //gameMechanics->newGame(&imageName);
      newGameWidget->show();
 }
 

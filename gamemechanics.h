@@ -12,8 +12,9 @@ class GameMechanics : public QObject
 
 
 public:
+    QString* imageName;
     GameMechanics(QObject *parent = 0);
-
+    ~GameMechanics();
 signals:
 
 public slots:

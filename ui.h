@@ -9,7 +9,7 @@
 #include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
-#include <QFileDialog>
+
 
 #include "helper.h"
 #include "gamemechanics.h"

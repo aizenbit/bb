@@ -6,22 +6,31 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
-
+#include <QLineEdit>
+#include <QFileDialog>
+#include <QRadioButton>
 class NewGameWidget : public QWidget
 {
     Q_OBJECT
 private:
     QVBoxLayout* mainLayout;
+    QHBoxLayout* pathLayout;
     QHBoxLayout* buttonsLayout;
     QPushButton* okButton;
     QPushButton* cancelButton;
+    QPushButton* browseButton;
+    QLineEdit* pathLineEdit;
+    QString* imageName;
+    QRadioButton* defaultImageRB;
+    QRadioButton* userImageRB;
 public:
-    explicit NewGameWidget(QWidget *parent = 0);
-
+    NewGameWidget(QString* imgName, QWidget *parent = 0);
+    ~NewGameWidget();
 signals:
 
 public slots:
-
+    void newGame();
+    void browse();
 };
 
 #endif // NEWGAMEWIDGET_H
