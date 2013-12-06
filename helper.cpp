@@ -12,7 +12,7 @@ void Helper::paintEvent(QPaintEvent *paintEvent)
 {
     QPainter painter(this);
     painter.begin(this);
-    painter.drawText(12,12,"Р­С‚Рѕ С‚Рѕ РјРµСЃС‚Рѕ, РіРґРµ Р±СѓРґРµС‚ РєР°СЂС‚РёРЅРєР°");
+    painter.drawText(12,12,"Это то место, где будет картинка");
     painter.end();
 }
 
