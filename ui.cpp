@@ -78,9 +78,12 @@ UI::~UI()
 {
     delete helper;
     delete gameMenu;
+    delete aboutMenu;
     delete menuBar;
     delete gameMechanics;
     delete creatorsLabel;
+    delete aboutTheGameLabel;
+    delete newGameWidget;
 }
 
 //-----------------------------------------
