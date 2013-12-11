@@ -1,21 +1,20 @@
-/*
- *  Класс, отвечающий за игровую механику
- */
+
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
 #include <QWidget>
+#include <QImage>
+#include <QPoint>
 
 class GameMechanics : public QWidget
 {
     Q_OBJECT
 
-    friend class Helper;
-
 private:
     int pieceCount;
     QImage** array;
-    virtual void paintEvent(QPaintEvent *); //тут мы рисуем
+    QPoint emptyPeace;
+    virtual void paintEvent(QPaintEvent *); //��� �� ������
 public:
     QString* imageName;
     GameMechanics(QWidget *parent = 0);
@@ -25,6 +24,10 @@ signals:
 public slots:
     void newGame(QString* imageName);
     void hint();
+    void mixArray();
+    void qclick();
+    void imagePressed(QImage &pict1, QImage &pict2);
+
 };
 
 #endif // GAMEMECHANICS_H
