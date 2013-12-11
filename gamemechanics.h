@@ -24,7 +24,8 @@ public slots:
     void newGame(QString* imageName);
     void hint();
     void mixArray();
-    void imagePressed();
+    void qclick();
+    void imagePressed(QImage &pict1, QImage &pict2);
 
 };
 
