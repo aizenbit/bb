@@ -14,7 +14,7 @@ private:
     int pieceCount;
     QImage** array;
     QPoint emptyPeace;
-    virtual void paintEvent(QPaintEvent *); //тут мы рисуем
+    virtual void paintEvent(QPaintEvent *); //С‚СѓС‚ РјС‹ СЂРёСЃСѓРµРј
 public:
     QString* imageName;
     GameMechanics(QWidget *parent = 0);
@@ -25,7 +25,7 @@ public slots:
     void newGame(QString* imageName);
     void hint();
     void mixArray();
-    void qclick();
+    //void qclick();
     void imagePressed(QImage &pict1, QImage &pict2);
 
 };

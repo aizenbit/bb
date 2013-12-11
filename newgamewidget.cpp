@@ -4,6 +4,7 @@ NewGameWidget::NewGameWidget(QString* imgName, QWidget *parent) :
     QWidget(parent)
 {
     imageName = imgName;
+
     //------------------Buttons------------------
     okButton = new QPushButton(tr("&Ok"));
     cancelButton = new QPushButton(tr("&Cancel"));

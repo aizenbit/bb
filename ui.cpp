@@ -8,6 +8,7 @@ UI::UI(QWidget *parent)
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
     this->setCentralWidget(gameMechanics);
+
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 

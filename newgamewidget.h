@@ -23,9 +23,11 @@ private:
     QString* imageName;
     QRadioButton* defaultImageRB;
     QRadioButton* userImageRB;
+
 public:
     NewGameWidget(QString* imgName, QWidget *parent = 0);
     ~NewGameWidget();
+
 signals:
 
 public slots:
