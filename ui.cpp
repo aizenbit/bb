@@ -4,12 +4,10 @@ UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setFixedSize(400,350);
-    helper = new Helper();
-    this->setCentralWidget(helper);
 
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
-
+    this->setCentralWidget(gameMechanics);
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 
@@ -76,7 +74,6 @@ UI::UI(QWidget *parent)
 
 UI::~UI()
 {
-    delete helper;
     delete gameMenu;
     delete aboutMenu;
     delete menuBar;

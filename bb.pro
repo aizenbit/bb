@@ -14,11 +14,9 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ui.cpp \
-    helper.cpp \
     gamemechanics.cpp \
     newgamewidget.cpp
 
 HEADERS  += ui.h \
-    helper.h \
     gamemechanics.h \
     newgamewidget.h

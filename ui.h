@@ -10,8 +10,6 @@
 #include <QMenu>
 #include <QMenuBar>
 
-
-#include "helper.h"
 #include "gamemechanics.h"
 #include "newgamewidget.h"
 
@@ -26,8 +24,7 @@ private:
      QLabel* creatorsLabel; //окошко "О создателях"
      QLabel* aboutTheGameLabel;//окошко "Об игре"
      NewGameWidget* newGameWidget;//окошко "Новая игра"
-     Helper* helper; //"холст"
-     GameMechanics* gameMechanics;//основная механика игры. Пусть пока будет тут
+     GameMechanics* gameMechanics;//основная механика игры.
 
 private slots:
      void newGame();

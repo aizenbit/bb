@@ -4,16 +4,21 @@
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
-#include <QObject>
+#include <QWidget>
 
-class GameMechanics : public QObject
+class GameMechanics : public QWidget
 {
     Q_OBJECT
 
+    friend class Helper;
 
+private:
+    int pieceCount;
+    QImage** array;
+    virtual void paintEvent(QPaintEvent *); //тут мы рисуем
 public:
     QString* imageName;
-    GameMechanics(QObject *parent = 0);
+    GameMechanics(QWidget *parent = 0);
     ~GameMechanics();
 signals:
 
