@@ -19,36 +19,30 @@ GameMechanics::GameMechanics(QWidget *parent) :
 void GameMechanics::mixArray()
 { 	//Начинаем перемешивать части картинок по алгоритму
     int x1,y1,x2,y2;
+    x1=0;
+    y1=0;
 	for(int x=0;x<pieceCount;x++){
-		for(int y=0;y<pieceCount;y++){
-            if(y=pieceCount)
+        for(int y=0;y<(pieceCount+1);y++){
+            if(y==pieceCount)
                 {
-                array[x1][y1] = array[x][y];
-                array[x][y] = array[x+1][y];
-                array[x+1][y]=array[x1][y1];
+                imagePressed(array[x][y], array[x+1][y]);
                 }
                 else
                    {
-                     array[x1][y1] = array[x][y];
-                     array[x][y] = array[x][y+1];
-                     array[x][y+1] = array[x1][y1];
+                     imagePressed(array[x][y], array[x][y+1]);
                     }
 		}
 	}
     for(int k=0;k<(pieceCount*(rand()%(5)));k++){
        for(y2=0;y2<pieceCount;y2++){
-         for(x2=0;x2<pieceCount;x2++){
-            if(x2=pieceCount)
+         for(x2=0;x2<(pieceCount+1);x2++){
+            if(x2==pieceCount)
                 {
-                array[x1][y1] = array[x2][y2];
-                array[x2][y2] = array[x2][y2+1];
-                array[x2][y2+1]=array[x1][y1];
+                imagePressed(array[x2][y2], array[x2][y2+1]);
                 }
                 else
                    {
-                     array[x1][y1] = array[x2][y2];
-                     array[x2][y2] = array[x2+1][y2];
-                     array[x2+1][y2] = array[x1][y1];
+                     imagePressed(array[x2][y2], array[x2+1][y2]);
                     }
         }
     }
