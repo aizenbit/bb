@@ -12,6 +12,7 @@ class GameMechanics : public QWidget
 
 private:
     int pieceCount;
+    QImage* image;
     QImage** array;
     QPoint emptyPeace;
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
@@ -22,7 +23,7 @@ public:
 signals:
 
 public slots:
-    void newGame(QString* imageName);
+    void newGame();
     void hint();
     void mixArray();
     //void qclick();

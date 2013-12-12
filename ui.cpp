@@ -66,7 +66,7 @@ UI::UI(QWidget *parent)
     aboutTheGameLabel->setWindowTitle(tr("About The Game"));
 
     //------------------newGameWidget----------------
-    newGameWidget = new NewGameWidget(gameMechanics->imageName);
+    newGameWidget = new NewGameWidget(gameMechanics);
 
 
 }
@@ -78,10 +78,10 @@ UI::~UI()
     delete gameMenu;
     delete aboutMenu;
     delete menuBar;
-    delete gameMechanics;
     delete creatorsLabel;
     delete aboutTheGameLabel;
     delete newGameWidget;
+    delete gameMechanics;
 }
 
 //-----------------------------------------

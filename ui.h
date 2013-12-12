@@ -26,6 +26,7 @@ private:
      NewGameWidget* newGameWidget;//окошко "Новая игра"
      GameMechanics* gameMechanics;//основная механика игры.
 
+     friend class NewGameWidget;
 private slots:
      void newGame();
      void aboutTheGame();

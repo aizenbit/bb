@@ -1,16 +1,18 @@
 #include "gamemechanics.h"
 #include <QPainter>
 #include <QtCore/qmath.h>
+#include <QLabel>
 
 GameMechanics::GameMechanics(QWidget *parent) :
 	QWidget(parent)
 {
-	imageName = new QString("");
+    imageName = new QString();
 	pieceCount = 3;
 	array = new QImage*[pieceCount];
 	for (int i = 0; i < pieceCount; i++)
 		array[i] = new QImage[pieceCount];
 	emptyPeace = QPoint(pieceCount-1,pieceCount-1);
+
 }
 
 //-----------------------------------------
@@ -94,9 +96,18 @@ void GameMechanics::imagePressed(QImage &pict1, QImage &pict2)
 
 //-----------------------------------------
 
-void GameMechanics::newGame(QString* imageName)
+void GameMechanics::newGame()
 {
-
+    int width = this->width();
+    QImage temp(*imageName);
+    temp = temp.scaled(QSize(this->width(),this->height()));
+    image = &temp;
+    for(int x = 0;x < pieceCount;x++)
+        for(int y = 0;y<pieceCount;y++)
+        {
+            array[x][y] = image->copy(this->width()/pieceCount*x,this->height()/pieceCount*y,this->width()/pieceCount,this->height()/pieceCount);
+            //array[x][y].scaled(QSize(this->width()/pieceCount*x,this->height()/pieceCount*y),Qt::KeepAspectRatioByExpanding);
+        }
 }
 
 //-----------------------------------------
@@ -110,7 +121,8 @@ void GameMechanics::hint()
 
 GameMechanics::~GameMechanics()
 {
-	delete imageName;
+    //delete imageName; //TODO: хз почему, но на этом моменте прога выбрасывает исключение.
+    //delete image;
 	for (int i = 0; i < pieceCount; i++)
 		delete[] array[i];
 	delete[] array;
@@ -122,9 +134,19 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
 	QPainter painter(this);
 	painter.begin(this);
-	for(int x = 0;x < pieceCount;x++)
-		for(int y = 0;y<pieceCount;y++)
-			painter.drawImage(this->width()/pieceCount*x,this->height()/pieceCount*y,array[x][y]);
+
+    int pieceWidth = this->width()/pieceCount;
+    int pieceHeight = this->height()/pieceCount;
+    //рисуем картинки
+    for(int x = 0; x < pieceCount; x++)
+        for(int y = 0; y < pieceCount; y++)
+            painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y]);
+    //рисуем линии между картинками
+    painter.setPen(QColor(0,0,0));
+    for(int x = pieceWidth; x < this->width();x+=pieceWidth)
+        painter.drawLine(x,0,x,this->height());
+    for(int y = pieceHeight; y < this->height();y+=pieceHeight)
+        painter.drawLine(0,y,this->width(),y);
 	painter.end();
 }
 

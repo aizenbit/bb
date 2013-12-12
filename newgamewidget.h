@@ -9,6 +9,8 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QRadioButton>
+#include "gamemechanics.h"
+
 class NewGameWidget : public QWidget
 {
     Q_OBJECT
@@ -23,9 +25,10 @@ private:
     QString* imageName;
     QRadioButton* defaultImageRB;
     QRadioButton* userImageRB;
+    GameMechanics* gameMechanics;
 
 public:
-    NewGameWidget(QString* imgName, QWidget *parent = 0);
+    NewGameWidget(GameMechanics* gmMechanics, QWidget *parent = 0);
     ~NewGameWidget();
 
 signals:

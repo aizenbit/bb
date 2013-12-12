@@ -1,10 +1,12 @@
 #include "newgamewidget.h"
+#include "ui.h"
 
-NewGameWidget::NewGameWidget(QString* imgName, QWidget *parent) :
+NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     QWidget(parent)
 {
-    imageName = imgName;
 
+    gameMechanics = gmMechanics;
+    imageName = gmMechanics->imageName;
     //------------------Buttons------------------
     okButton = new QPushButton(tr("&Ok"));
     cancelButton = new QPushButton(tr("&Cancel"));
@@ -19,7 +21,7 @@ NewGameWidget::NewGameWidget(QString* imgName, QWidget *parent) :
 
     //------------------connections---------------
     connect(okButton,SIGNAL(clicked()),this,SLOT(close()));
-    connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
+    //connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
     connect(cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(browseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(defaultImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setDisabled(bool)));
@@ -48,10 +50,11 @@ NewGameWidget::NewGameWidget(QString* imgName, QWidget *parent) :
 
 void NewGameWidget::newGame()
 {
-    if (userImageRB->isChecked())
-    imageName=&(pathLineEdit->text());
+    /*if (userImageRB->isChecked())
+    imageName=pathLineEdit->text();
     else
-        imageName = &QString("");
+        imageName = &QString("");*/
+    //gameMechanics->newGame();
     this->close();
 }
 
@@ -59,9 +62,12 @@ void NewGameWidget::newGame()
 
 void NewGameWidget::browse()
 {
-    QString imageName = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
-    pathLineEdit->setText(imageName);
-    this->setFocus();
+    QString in = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
+    imageName = &in;
+    pathLineEdit->setText(*imageName);
+    gameMechanics->imageName=imageName;
+    gameMechanics->newGame();
+    this->close();
 }
 
 //-----------------------------------------
@@ -72,10 +78,10 @@ NewGameWidget::~NewGameWidget()
     delete cancelButton;
     delete browseButton;
     delete pathLineEdit;
-    delete imageName;
     delete defaultImageRB;
     delete userImageRB;
-    delete mainLayout;
     delete pathLayout;
     delete buttonsLayout;
+    delete mainLayout;
+
 }
