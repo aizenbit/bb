@@ -26,28 +26,20 @@ void GameMechanics::mixArray()
 	for(int x=0;x<pieceCount;x++){
         for(int y=0;y<(pieceCount+1);y++){
             if(y==pieceCount)
-                {
                 imagePressed(array[x][y], array[x+1][y]);
-                }
-                else
-                   {
-                     imagePressed(array[x][y], array[x][y+1]);
-                    }
+            else
+                imagePressed(array[x][y], array[x][y+1]);
 		}
 	}
     for(int k=0;k<(pieceCount*(rand()%(5)));k++){
        for(y2=0;y2<pieceCount;y2++){
          for(x2=0;x2<(pieceCount+1);x2++){
             if(x2==pieceCount)
-                {
                 imagePressed(array[x2][y2], array[x2][y2+1]);
-                }
-                else
-                   {
-                     imagePressed(array[x2][y2], array[x2+1][y2]);
-                    }
+            else
+                imagePressed(array[x2][y2], array[x2+1][y2]);
+            }
         }
-    }
     }
 }
 //-----------------------------------------
@@ -65,13 +57,14 @@ void GameMechanics::imagePressed(QImage &pict1, QImage &pict2)
 
 void GameMechanics::newGame()
 {
-    int width = this->width();
+    int pieceWidth = this->width()/pieceCount;
+    int pieceHeight = this->height()/pieceCount;
     QImage temp(*imageName);
     temp = temp.scaled(QSize(this->width(),this->height()));
     image = &temp;
     for(int x = 0;x < pieceCount;x++)
         for(int y = 0;y<pieceCount;y++)
-            array[x][y] = image->copy(this->width()/pieceCount*x,this->height()/pieceCount*y,this->width()/pieceCount,this->height()/pieceCount);          
+            array[x][y] = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
 }
 
 //-----------------------------------------
@@ -111,6 +104,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         painter.drawLine(x,0,x,this->height());
     for(int y = pieceHeight; y < this->height();y+=pieceHeight)
         painter.drawLine(0,y,this->width(),y);
+
 	painter.end();
 }
 
