@@ -20,8 +20,8 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     pathLineEdit = new QLineEdit();
 
     //------------------connections---------------
-    connect(okButton,SIGNAL(clicked()),this,SLOT(close()));
-    //connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
+    //connect(okButton,SIGNAL(clicked()),this,SLOT(close()));
+    connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
     connect(cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(browseButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(defaultImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setDisabled(bool)));
@@ -50,11 +50,13 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
 
 void NewGameWidget::newGame()
 {
-    /*if (userImageRB->isChecked())
-    imageName=pathLineEdit->text();
-    else
-        imageName = &QString("");*/
-    //gameMechanics->newGame();
+    if (!userImageRB->isChecked())
+    {
+        delete imageName;
+        imageName = new QString("default.jpg");
+        gameMechanics->imageName=imageName;
+    }
+    gameMechanics->newGame();
     this->close();
 }
 
@@ -66,8 +68,7 @@ void NewGameWidget::browse()
     imageName = &in;
     pathLineEdit->setText(*imageName);
     gameMechanics->imageName=imageName;
-    gameMechanics->newGame();
-    this->close();
+    newGame();
 }
 
 //-----------------------------------------
