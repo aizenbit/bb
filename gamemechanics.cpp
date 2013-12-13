@@ -71,10 +71,7 @@ void GameMechanics::newGame()
     image = &temp;
     for(int x = 0;x < pieceCount;x++)
         for(int y = 0;y<pieceCount;y++)
-        {
-            array[x][y] = image->copy(this->width()/pieceCount*x,this->height()/pieceCount*y,this->width()/pieceCount,this->height()/pieceCount);
-            //array[x][y].scaled(QSize(this->width()/pieceCount*x,this->height()/pieceCount*y),Qt::KeepAspectRatioByExpanding);
-        }
+            array[x][y] = image->copy(this->width()/pieceCount*x,this->height()/pieceCount*y,this->width()/pieceCount,this->height()/pieceCount);          
 }
 
 //-----------------------------------------
