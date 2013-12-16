@@ -11,10 +11,14 @@ class GameMechanics : public QWidget
     Q_OBJECT
 
 private:
+    struct qwaqwa
+    {
+        int x,y;
+        QImage img;
+    };
     int pieceCount;
     QImage* image;
-    QImage** array;
-    QPoint emptyPeace;
+    qwaqwa** array;
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
 public:
     QString* imageName;
@@ -27,7 +31,7 @@ public slots:
     void hint();
     void mixArray();
     //void qclick();
-    void imagePressed(QImage &pict1, QImage &pict2);
+    void imagePressed(qwaqwa *pict1, qwaqwa *pict2);
 
 };
 

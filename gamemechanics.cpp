@@ -8,52 +8,65 @@ GameMechanics::GameMechanics(QWidget *parent) :
 {
     imageName = new QString();
 	pieceCount = 3;
-	array = new QImage*[pieceCount];
+    array = new qwaqwa*[pieceCount];
 	for (int i = 0; i < pieceCount; i++)
-		array[i] = new QImage[pieceCount];
-	emptyPeace = QPoint(pieceCount-1,pieceCount-1);
-
+        array[i] = new qwaqwa[pieceCount];
+    for (int x = 0; x<pieceCount;x++)
+        for(int y = 0; y<pieceCount;y++)
+        {
+            array[x][y].x=x;
+            array[x][y].y=y;
+        }
 }
 
 //-----------------------------------------
-
 
 void GameMechanics::mixArray()
 { 	//Начинаем перемешивать части картинок по алгоритму
     int x1,y1,x2,y2;
     x1=0;
     y1=0;
-	for(int x=0;x<pieceCount;x++){
-        for(int y=0;y<(pieceCount+1);y++){
+    for(int x=0;x<pieceCount;x++){
+        for(int y=0;y<(pieceCount+1);y++)
             if(y==pieceCount)
-                imagePressed(array[x][y], array[x+1][y]);
+            {
+                qwaqwa t;
+                t = array[x][y];
+                array[x][y] = array[x+1][y];
+                array[x+1][y] = t;
+            }
             else
-                imagePressed(array[x][y], array[x][y+1]);
-		}
-	}
+            {
+                qwaqwa t;
+                t = array[x][y];
+                array[x][y] = array[x][y+1];
+                array[x][y+1] = t;
+            }
+    }
     for(int k=0;k<(pieceCount*(rand()%(5)));k++){
-       for(y2=0;y2<pieceCount;y2++){
-         for(x2=0;x2<(pieceCount+1);x2++){
+       for(y2=0;y2<pieceCount;y2++)
+           for(x2=0;x2<(pieceCount+1);x2++){
             if(x2==pieceCount)
-                imagePressed(array[x2][y2], array[x2][y2+1]);
+            {
+                qwaqwa t;
+                t = array[x2][y2];
+                array[x2][y2] = array[x2][y2+1];
+                array[x2][y2+1] = t;
+            }
             else
-                imagePressed(array[x2][y2], array[x2+1][y2]);
+            {
+                qwaqwa t;
+                t = array[x2][y2];
+                array[x2][y2] = array[x2+1][y2];
+                array[x2+1][y2] = t;
             }
         }
     }
 }
-//-----------------------------------------
 
-void GameMechanics::imagePressed(QImage &pict1, QImage &pict2)
-{
-	QImage temp;
-	temp=pict1;
-	pict1=pict2;
-	pict2=temp;
-
-}
 
 //-----------------------------------------
+
 
 void GameMechanics::newGame()
 {
@@ -63,18 +76,26 @@ void GameMechanics::newGame()
     temp = temp.scaled(QSize(this->width(),this->height()));
     image = &temp;
     for(int x = 0;x < pieceCount;x++)
-        for(int y = 0;y<pieceCount;y++)
-            array[x][y] = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
+    {
+        for(int y = 0;y<pieceCount-1;y++)
+        {
+            array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
+        }
+    }
+    for(int x = 0;x<pieceCount-1;x++)
+    {
+        array[x][pieceCount-1].img = image->copy(pieceWidth*x,pieceHeight*(pieceCount-1),pieceWidth,pieceHeight);
+    }
 }
 
-//-----------------------------------------
+//----------------------------------------
 
 void GameMechanics::hint()
 {
 
 }
 
-//-----------------------------------------
+//----------------------------------------
 
 GameMechanics::~GameMechanics()
 {
@@ -85,7 +106,7 @@ GameMechanics::~GameMechanics()
 	delete[] array;
 }
 
-//-----------------------------------------
+
 
 void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
@@ -96,8 +117,16 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
     int pieceHeight = this->height()/pieceCount;
     //рисуем картинки
     for(int x = 0; x < pieceCount; x++)
-        for(int y = 0; y < pieceCount; y++)
-            painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y]);
+    {
+        for(int y = 0; y < pieceCount-1; y++)
+        {
+            painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
+        }
+    }
+    for(int x = 0; x < pieceCount-1; x++)
+    {
+        painter.drawImage(pieceWidth*x,pieceHeight*(pieceCount-1),array[x][pieceCount-1].img);
+    }
     //рисуем линии между картинками
     painter.setPen(QColor(0,0,0));
     for(int x = pieceWidth; x < this->width();x+=pieceWidth)
@@ -105,7 +134,17 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
     for(int y = pieceHeight; y < this->height();y+=pieceHeight)
         painter.drawLine(0,y,this->width(),y);
 
-	painter.end();
+    painter.end();
 }
 
-//-----------------------------------------
+void GameMechanics::imagePressed(qwaqwa *pict1, qwaqwa *pict2)
+//Подаем элементы массива того
+//И все равно, мне кажется это странным
+{
+        qwaqwa *temp;
+        temp=pict1;
+        pict1=pict2;
+        pict2=temp;
+}
+
+//----------------------------------------
