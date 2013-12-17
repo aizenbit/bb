@@ -20,3 +20,5 @@ SOURCES += main.cpp\
 HEADERS  += ui.h \
     gamemechanics.h \
     newgamewidget.h
+
+TRANSLATIONS += bb-ru_RU.ts

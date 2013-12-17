@@ -4,7 +4,7 @@
 NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     QWidget(parent)
 {
-
+    setWindowTitle(tr("New Game"));
     gameMechanics = gmMechanics;
     imageName = gmMechanics->imageName;
     //------------------Buttons------------------
