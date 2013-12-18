@@ -40,24 +40,15 @@ void GameMechanics::mixArray()
 
 void GameMechanics::newGame()
 {
-    pieceWidth = this->width()/pieceCount;
-    pieceHeight = this->height()/pieceCount;
-    typeOfPainting = pieces;
+    pieceWidth = this->width() / pieceCount;
+    pieceHeight = this->height() / pieceCount;
+    typeOfPainting = fullImage;
     QImage temp(*imageName);
     temp = temp.scaled(QSize(this->width(),this->height()));
     image = &temp;
-    for(int x = 0;x < pieceCount;x++)
-    {
-        for(int y = 0;y<pieceCount-1;y++)
-        {
-            array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
-        }
-    }
-    for(int x = 0;x<pieceCount-1;x++)
-    {
-        array[x][pieceCount-1].img = image->copy(pieceWidth*x,pieceHeight*(pieceCount-1),pieceWidth,pieceHeight);
-    }
-    array[pieceCount-1][pieceCount-1].img = QImage();
+    for(int x = 0; x < pieceCount; x++)
+            for(int y = 0; y < pieceCount; y++)
+                array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
    // mixArray();
@@ -67,26 +58,8 @@ void GameMechanics::newGame()
 
 void GameMechanics::hint()
 {
-    QLabel *lbl = new QLabel("Меня нажали!");
-    lbl->show();
-    QPainter painter(this);
-    painter.begin(this);
-
-    {
-        pieceWidth = this->width()/pieceCount;
-        pieceHeight = this->height()/pieceCount;
-        //рисуем картинки
-        for(int x = 0; x < pieceCount; x++)
-        {
-        for(int y = 0; y < pieceCount; y++)
-        {
-        if ( array[x][y].x != pieceCount-1 && array[x][y].y != pieceCount - 1)
-        painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
-        }
-        }
-    };
-    painter.end();
-}
+    typeOfPainting = fullImage;
+    repaint();}
 
 //----------------------------------------
 
@@ -112,12 +85,9 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         pieceHeight = this->height()/pieceCount;
         //рисуем картинки
         for(int x = 0; x < pieceCount; x++)
-        {
             for(int y = 0; y < pieceCount; y++)
-            {
-                painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
-            }
-        }
+                //if( !( (array[x][y].x == emptyImagePos.x()) && (array[x][y].y == emptyImagePos.y()) ) )
+                    painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
         //рисуем линии между картинками
         painter.setPen(QColor(0,0,0));
         for(int x = pieceWidth; x < this->width();x+=pieceWidth)
@@ -125,9 +95,13 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         for(int y = pieceHeight; y < this->height();y+=pieceHeight)
             painter.drawLine(0,y,this->width(),y);
         break;
-    case fullImage:
 
+    case fullImage:
+        for(int x = 0; x < pieceCount; x++)
+            for(int y = 0; y < pieceCount; y++)
+                painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
         break;
+
     default:
         painter.drawText(this->width()/2-70,this->height()/2-15,"Please, begin the game");
         break;
@@ -139,7 +113,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->posF());
+    imagePressed(event->localPos());
 }
 
 //----------------------------------------
@@ -148,19 +122,7 @@ void GameMechanics::imagePressed(QPointF pos)
 //Подаем элементы массива того
 //И все равно, мне кажется это странным
 {
-    int x = (int)pos.x(); //% pieceWidth;
-    int y = (int)pos.y(); //% pieceHeight;
-    x /= pieceWidth;
-    y /= pieceHeight;
-    //Условие монструозно, но штоподелать, если нет исключающего "или"?
-    if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
-    {
-        array[x][y].img.swap(array[emptyImagePos.x()][emptyImagePos.y()].img);
-        emptyImagePos.setX(x);
-        emptyImagePos.setY(y);
-        repaint();
-    }
-    if(!array[0][0].img.isNull())
+    if(!array[0][0].img.isNull() && typeOfPainting == pieces)
     {
         int x = (int)pos.x(); //% pieceWidth;
         int y = (int)pos.y(); //% pieceHeight;
@@ -169,11 +131,18 @@ void GameMechanics::imagePressed(QPointF pos)
         //Условие монструозно, но штоподелать, если нет исключающего "или"?
         if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
         {
-            array[x][y].img.swap(array[emptyImagePos.x()][emptyImagePos.y()].img);
+            qwaqwa tempPiece = array[x][y];
+            array[x][y]= array[emptyImagePos.x()][emptyImagePos.y()];
+            array[emptyImagePos.x()][emptyImagePos.y()] = tempPiece;
             emptyImagePos.setX(x);
             emptyImagePos.setY(y);
             repaint();
         }
+    }
+    if(typeOfPainting == fullImage)
+    {
+        typeOfPainting = pieces;
+        repaint();
     }
 }
 
