@@ -79,7 +79,7 @@ UI::~UI()
     delete creatorsLabel;
     delete aboutTheGameLabel;
     delete newGameWidget;
-    delete gameMechanics;
+    //delete gameMechanics;
 }
 
 //-----------------------------------------

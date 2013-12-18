@@ -71,7 +71,7 @@ void GameMechanics::hint()
 
 GameMechanics::~GameMechanics()
 {
-    //delete imageName; //TODO: хз почему, но на этом моменте прога выбрасывает исключение.
+    //delete imageName; TODO: хз почему, но тут прога выбрасывает исключение
     //delete image;
         for (int i = 0; i < pieceCount; i++)
                 delete[] array[i];
@@ -108,7 +108,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
         break;
     default:
-            painter.drawText(this->width()/2-70,this->height()/2-15,"Please, begin the game");
+        painter.drawText(this->width()/2-70,this->height()/2-15,"Please, begin the game");
         break;
     };
     painter.end();

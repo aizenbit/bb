@@ -97,5 +97,5 @@ NewGameWidget::~NewGameWidget()
     delete pathLayout;
     delete buttonsLayout;
     delete mainLayout;
-
+    delete gameMechanics;
 }
