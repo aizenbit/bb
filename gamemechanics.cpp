@@ -124,6 +124,21 @@ void GameMechanics::imagePressed(QPointF pos)
         emptyImagePos.setY(y);
         repaint();
     }
+    if(!array[0][0].img.isNull())
+    {
+        int x = (int)pos.x(); //% pieceWidth;
+        int y = (int)pos.y(); //% pieceHeight;
+        x /= pieceWidth;
+        y /= pieceHeight;
+        //Условие монструозно, но штоподелать, если нет исключающего "или"?
+        if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
+        {
+            array[x][y].img.swap(array[emptyImagePos.x()][emptyImagePos.y()].img);
+            emptyImagePos.setX(x);
+            emptyImagePos.setY(y);
+            repaint();
+        }
+    }
 }
 
 //----------------------------------------
