@@ -9,7 +9,7 @@
 class GameMechanics : public QWidget
 {
     Q_OBJECT
-
+enum TypeOfPainting {fullImage, pieces, empty};
 private:
     struct qwaqwa
     {
@@ -22,6 +22,7 @@ private:
     QPoint emptyImagePos;
     int pieceWidth;
     int pieceHeight;
+    TypeOfPainting typeOfPainting;
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
     void mousePressEvent(QMouseEvent *);
     //virtual void mousePressEvent(QMouseEvent *event);

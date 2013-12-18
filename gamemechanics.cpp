@@ -21,6 +21,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
         }
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
+    typeOfPainting = empty;
 }
 
 //-----------------------------------------
@@ -41,6 +42,7 @@ void GameMechanics::newGame()
 {
     pieceWidth = this->width()/pieceCount;
     pieceHeight = this->height()/pieceCount;
+    typeOfPainting = pieces;
     QImage temp(*imageName);
     temp = temp.scaled(QSize(this->width(),this->height()));
     image = &temp;
@@ -76,37 +78,50 @@ GameMechanics::~GameMechanics()
         delete[] array;
 }
 
-
+//----------------------------------------
 
 void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
     QPainter painter(this);
-        painter.begin(this);
-    int pieceWidth = this->width()/pieceCount;
-    int pieceHeight = this->height()/pieceCount;
-    //рисуем картинки
-    for(int x = 0; x < pieceCount; x++)
+    painter.begin(this);
+    switch(typeOfPainting)
     {
-        for(int y = 0; y < pieceCount; y++)
+    case pieces:
+        pieceWidth = this->width()/pieceCount;
+        pieceHeight = this->height()/pieceCount;
+        //рисуем картинки
+        for(int x = 0; x < pieceCount; x++)
         {
-            painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
+            for(int y = 0; y < pieceCount; y++)
+            {
+                painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
+            }
         }
-    }
+        //рисуем линии между картинками
+        painter.setPen(QColor(0,0,0));
+        for(int x = pieceWidth; x < this->width();x+=pieceWidth)
+            painter.drawLine(x,0,x,this->height());
+        for(int y = pieceHeight; y < this->height();y+=pieceHeight)
+            painter.drawLine(0,y,this->width(),y);
+        break;
+    case fullImage:
 
-    //рисуем линии между картинками
-    painter.setPen(QColor(0,0,0));
-    for(int x = pieceWidth; x < this->width();x+=pieceWidth)
-        painter.drawLine(x,0,x,this->height());
-    for(int y = pieceHeight; y < this->height();y+=pieceHeight)
-        painter.drawLine(0,y,this->width(),y);
-
+        break;
+    default:
+            painter.drawText(this->width()/2-70,this->height()/2-15,"Please, begin the game");
+        break;
+    };
     painter.end();
 }
+
+//----------------------------------------
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
     imagePressed(event->localPos());
 }
+
+//----------------------------------------
 
 void GameMechanics::imagePressed(QPointF pos)
 //Подаем элементы массива того
