@@ -12,13 +12,13 @@ UI::UI(QWidget *parent)
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 
-    gameMenu->addAction(tr("&New Game"),
+    gameMenu->addAction(tr("&New game"),
                         this,
                         SLOT(newGame()));
     gameMenu->addAction(tr("&Hint"),
                            gameMechanics,
                            SLOT(hint()));
-    gameMenu->addAction(tr("Show &Image"),
+    gameMenu->addAction(tr("Show &image"),
                         this,
                         SLOT(showImage()));
 
@@ -44,26 +44,24 @@ UI::UI(QWidget *parent)
                                    "<CENTER>The best of the best!</CENTER>"
                                    "<CENTER>Very intresting game!</CENTER>"
                                    "<CENTER>Creators: aizenbit && den5509</CENTER>"));
-    creatorsLabel->setFixedSize(180,130);
-    creatorsLabel->setWindowTitle(tr("Creators"));
+    creatorsLabel->setWindowTitle(tr("&Creators"));
 
     //------------------aboutTheGameLabel------------
     aboutTheGameLabel = new QLabel(tr(
-                                       "<H1><CENTER>bb</CENTER></H1>"
+                                       "<pre><H1><CENTER>bb</CENTER></H1>"
                                        "<H2><CENTER>Gem Puzzle</CENTER></H2>"
-                                       "<pre>    is a sliding puzzle that consists of a frame of numbered<br>"
-                                       "    square tiles in random order with one tile missing.<br>"
-                                       "    The puzzle also exists in other sizes, particularly<br>"
-                                       "    the smaller 8-puzzle. If the size is 3x3 tiles, the puzzle is<br>"
-                                       "    called the 8-puzzle or 9-puzzle, and if 4x4 tiles, the<br>"
-                                       "    puzzle is called the 15-puzzle or 16-puzzle named, respectively,<br>"
-                                       "    for the number of tiles and the number of spaces. The object<br>"
-                                       "    of the puzzleis to place the tiles in order by making sliding<br>"
-                                       "    moves that use the empty space.<br>"
-                                       "                                                              (c) Wiki</pre>"
+                                       "\tis a sliding puzzle that consists of a frame of numbered\t<br>"
+                                       "\tsquare tiles in random order with one tile missing.\t<br>"
+                                       "\tThe puzzle also exists in other sizes, particularly\t<br>"
+                                       "\tthe smaller 8-puzzle. If the size is 3x3 tiles, the puzzle is\t<br>"
+                                       "\tcalled the 8-puzzle or 9-puzzle, and if 4x4 tiles, the\t<br>"
+                                       "\tpuzzle is called the 15-puzzle or 16-puzzle named, respectively,\t<br>"
+                                       "\tfor the number of tiles and the number of spaces. The object\t<br>"
+                                       "\tof the puzzleis to place the tiles in order by making sliding\t<br>"
+                                       "\tmoves that use the empty space.\t<br>"
+                                       "                                                              (c) Wiki<br><br></pre>"
                                        ));
-    aboutTheGameLabel->setFixedWidth(568);
-    aboutTheGameLabel->setWindowTitle(tr("About The Game"));
+    aboutTheGameLabel->setWindowTitle(tr("About the &game"));
 
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);

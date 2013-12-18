@@ -19,7 +19,12 @@ private:
     int pieceCount;
     QImage* image;
     qwaqwa** array;
+    QPoint emptyImagePos;
+    int pieceWidth;
+    int pieceHeight;
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
+    void mousePressEvent(QMouseEvent *);
+    //virtual void mousePressEvent(QMouseEvent *event);
 public:
     QString* imageName;
     GameMechanics(QWidget *parent = 0);
@@ -31,7 +36,7 @@ public slots:
     void hint();
     void mixArray();
     //void qclick();
-    void imagePressed(qwaqwa *pict1, qwaqwa *pict2);
+    void imagePressed(QPointF);
 
 };
 
