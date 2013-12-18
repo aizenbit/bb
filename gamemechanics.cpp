@@ -57,6 +57,9 @@ void GameMechanics::newGame()
     {
         array[x][pieceCount-1].img = image->copy(pieceWidth*x,pieceHeight*(pieceCount-1),pieceWidth,pieceHeight);
     }
+    array[pieceCount-1][pieceCount-1].img = QImage();
+    emptyImagePos.setX(pieceCount-1);
+    emptyImagePos.setY(pieceCount-1);
    // mixArray();
 }
 
