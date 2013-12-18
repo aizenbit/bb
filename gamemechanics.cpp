@@ -28,8 +28,8 @@ GameMechanics::GameMechanics(QWidget *parent) :
 
 void GameMechanics::mixArray()
     //Начинаем перемешивать части картинок по алгоритму
-{int n=rand()%(59);
-         for(int x = 0; x < ((pieceCount*pieceCount-1)*(rand()%(n)));x++)
+{
+         for(int x = 0; x < ((pieceCount*pieceCount-1)*(rand()%(9)));x++)
              array[x/pieceCount][x%pieceCount].img.swap(array[(x+1)/pieceCount][(x+1)%pieceCount].img);
          for(int y = 0; y < ((pieceCount*pieceCount-1)*(rand()%(7)));y++)//
              array[y/pieceCount][y%pieceCount].img.swap(array[(y+1)/pieceCount][(y+1)%pieceCount].img);
@@ -67,7 +67,25 @@ void GameMechanics::newGame()
 
 void GameMechanics::hint()
 {
+    QLabel *lbl = new QLabel("Меня нажали!");
+    lbl->show();
+    QPainter painter(this);
+    painter.begin(this);
 
+    {
+        pieceWidth = this->width()/pieceCount;
+        pieceHeight = this->height()/pieceCount;
+        //рисуем картинки
+        for(int x = 0; x < pieceCount; x++)
+        {
+        for(int y = 0; y < pieceCount-1; y++)
+        {
+        if ( array[x][y].x != pieceCount-1 && array[x][y].y != pieceCount - 1)
+        painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
+        }
+        }
+    };
+    painter.end();
 }
 
 //----------------------------------------
@@ -121,7 +139,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->localPos());
+    imagePressed(event->posF());
 }
 
 //----------------------------------------
