@@ -14,8 +14,8 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     browseButton = new QPushButton(tr("&Browse"));
 
     //------------------RadioButtons-------------
-    defaultImageRB = new QRadioButton(tr("Default Image"));
-    userImageRB = new QRadioButton(tr("User Image"));
+    defaultImageRB = new QRadioButton(tr("Default image"));
+    userImageRB = new QRadioButton(tr("User image"));
     userImageRB->setChecked(true);
 
     pathLineEdit = new QLineEdit();
@@ -58,13 +58,12 @@ void NewGameWidget::newGame()
         imageName = new QString("default.jpg");
         gameMechanics->imageName=imageName;
     }
-    if (pathLineEdit->text() != *imageName)
+    if(pathLineEdit->text() != imageName)
     {
-        delete imageName;
-        imageName = new QString(pathLineEdit->text());
-        gameMechanics->imageName=imageName;
+
     }
-    if (!gameMechanics->imageName->isEmpty())
+
+    if(!imageName->isEmpty())
         gameMechanics->newGame();
 
     this->close();

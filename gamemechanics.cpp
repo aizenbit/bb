@@ -82,7 +82,6 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
     QPainter painter(this);
         painter.begin(this);
-
     int pieceWidth = this->width()/pieceCount;
     int pieceHeight = this->height()/pieceCount;
     //рисуем картинки
@@ -93,6 +92,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
             painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
         }
     }
+
     //рисуем линии между картинками
     painter.setPen(QColor(0,0,0));
     for(int x = pieceWidth; x < this->width();x+=pieceWidth)
