@@ -2,14 +2,15 @@
 #include <QPainter>
 #include <QtCore/qmath.h>
 #include <QLabel>
+#include <QMouseEvent>
 
 GameMechanics::GameMechanics(QWidget *parent) :
-	QWidget(parent)
+        QWidget(parent)
 {
     imageName = new QString();
-	pieceCount = 3;
+        pieceCount = 3;
     array = new qwaqwa*[pieceCount];
-	for (int i = 0; i < pieceCount; i++)
+        for (int i = 0; i < pieceCount; i++)
         array[i] = new qwaqwa[pieceCount];
 
     for (int x = 0; x<pieceCount;x++)
@@ -18,7 +19,8 @@ GameMechanics::GameMechanics(QWidget *parent) :
             array[x][y].x=x;
             array[x][y].y=y;
         }
-
+    emptyImagePos.setX(pieceCount-1);
+    emptyImagePos.setY(pieceCount-1);
 }
 
 //-----------------------------------------
@@ -37,8 +39,8 @@ void GameMechanics::mixArray()
 
 void GameMechanics::newGame()
 {
-    int pieceWidth = this->width()/pieceCount;
-    int pieceHeight = this->height()/pieceCount;
+    pieceWidth = this->width()/pieceCount;
+    pieceHeight = this->height()/pieceCount;
     QImage temp(*imageName);
     temp = temp.scaled(QSize(this->width(),this->height()));
     image = &temp;
@@ -53,7 +55,7 @@ void GameMechanics::newGame()
     {
         array[x][pieceCount-1].img = image->copy(pieceWidth*x,pieceHeight*(pieceCount-1),pieceWidth,pieceHeight);
     }
-    mixArray();
+   // mixArray();
 }
 
 //----------------------------------------
@@ -69,17 +71,17 @@ GameMechanics::~GameMechanics()
 {
     //delete imageName; //TODO: хз почему, но на этом моменте прога выбрасывает исключение.
     //delete image;
-	for (int i = 0; i < pieceCount; i++)
-		delete[] array[i];
-	delete[] array;
+        for (int i = 0; i < pieceCount; i++)
+                delete[] array[i];
+        delete[] array;
 }
 
 
 
 void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
-	QPainter painter(this);
-	painter.begin(this);
+    QPainter painter(this);
+        painter.begin(this);
 
     int pieceWidth = this->width()/pieceCount;
     int pieceHeight = this->height()/pieceCount;
@@ -91,10 +93,6 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
             painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
         }
     }
-    /*for(int x = 0; x < pieceCount-1; x++)
-    {
-        painter.drawImage(pieceWidth*x,pieceHeight*(pieceCount-1),array[x][pieceCount-1].img);
-    }*/
     //рисуем линии между картинками
     painter.setPen(QColor(0,0,0));
     for(int x = pieceWidth; x < this->width();x+=pieceWidth)
@@ -105,14 +103,27 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
     painter.end();
 }
 
-void GameMechanics::imagePressed(qwaqwa *pict1, qwaqwa *pict2)
+void GameMechanics::mousePressEvent(QMouseEvent *event)
+{
+    imagePressed(event->localPos());
+}
+
+void GameMechanics::imagePressed(QPointF pos)
 //Подаем элементы массива того
 //И все равно, мне кажется это странным
 {
-        qwaqwa *temp;
-        temp=pict1;
-        pict1=pict2;
-        pict2=temp;
+    int x = (int)pos.x(); //% pieceWidth;
+    int y = (int)pos.y(); //% pieceHeight;
+    x /= pieceWidth;
+    y /= pieceHeight;
+    //Условие монструозно, но штоподелать, если нет исключающего "или"?
+    if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
+    {
+        array[x][y].img.swap(array[emptyImagePos.x()][emptyImagePos.y()].img);
+        emptyImagePos.setX(x);
+        emptyImagePos.setY(y);
+        repaint();
+    }
 }
 
 //----------------------------------------
