@@ -105,7 +105,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->localPos());
+    imagePressed(event->posF());
 }
 
 void GameMechanics::imagePressed(QPointF pos)
