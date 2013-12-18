@@ -78,7 +78,7 @@ void GameMechanics::hint()
         //рисуем картинки
         for(int x = 0; x < pieceCount; x++)
         {
-        for(int y = 0; y < pieceCount-1; y++)
+        for(int y = 0; y < pieceCount; y++)
         {
         if ( array[x][y].x != pieceCount-1 && array[x][y].y != pieceCount - 1)
         painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
