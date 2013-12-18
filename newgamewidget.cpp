@@ -52,17 +52,18 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
 
 void NewGameWidget::newGame()
 {
-    if (!userImageRB->isChecked())
+    if(pathLineEdit->text() != imageName)
+    {
+        delete imageName;
+        imageName = new QString(pathLineEdit->text());
+        gameMechanics->imageName=imageName;
+    }
+     if (!userImageRB->isChecked())
     {
         delete imageName;
         imageName = new QString("default.jpg");
         gameMechanics->imageName=imageName;
     }
-    if(pathLineEdit->text() != imageName)
-    {
-
-    }
-
     if(!imageName->isEmpty())
         gameMechanics->newGame();
 
