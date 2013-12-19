@@ -3,7 +3,6 @@
 #include <QtCore/qmath.h>
 #include <QLabel>
 #include <QMouseEvent>
-#include <QtDebug>
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
@@ -66,7 +65,6 @@ void GameMechanics::newGame()
     winflag = false;
     repaint();
     mixArray();
-    qDebug() << "\n\n\n---------------------\n\n\n" << *imageName;
     typeOfPainting = fullImage;
 }
 
@@ -121,7 +119,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         break;
 
     default:
-        painter.drawText(this->width() / 2 - 70, this->height() / 2 - 15, "Begin the game, please!");
+        painter.drawText(this->width() / 2 - 70, this->height() / 2 - 15, tr("Begin the game, please!"));
         break;
     };
     painter.end();
