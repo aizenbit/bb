@@ -1,6 +1,7 @@
 #include "ui.h"
 #include <QApplication>
 #include <time.h>
+
 int main(int argc, char *argv[])
 {
     QResource::registerResource("resources.qrc");

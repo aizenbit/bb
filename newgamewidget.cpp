@@ -27,7 +27,7 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     slider->setValue(3);
     slider->setTickPosition(QSlider::TicksBelow);
     slider->setOrientation(Qt::Horizontal);
-    QLabel *sliderLabel = new QLabel(tr("<pre><CENTER>Choose level:</CENTER>\n"
+    sliderLabel = new QLabel(tr("<pre><CENTER>Choose level:</CENTER>\n"
                                         "<CENTER>low\t     medium\thigh</CENTER><pre>"));
 
     //------------------connections---------------
@@ -56,7 +56,6 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     mainLayout->addLayout(buttonsLayout);
     this->setLayout(mainLayout);
     this->setFixedSize(300, 220);
-
 }
 
 //-----------------------------------------
@@ -101,10 +100,13 @@ NewGameWidget::~NewGameWidget()
     delete pathLineEdit;
     delete defaultImageRB;
     delete userImageRB;
+    delete slider;
+    delete sliderLabel;
     delete pathLayout;
     delete buttonsLayout;
     delete mainLayout;
     delete gameMechanics;
+
 }
 
 //----------------------------------------

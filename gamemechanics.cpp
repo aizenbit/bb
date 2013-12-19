@@ -89,6 +89,7 @@ GameMechanics::~GameMechanics()
                 delete[] array[i];
 
         delete[] array;
+
 }
 
 //----------------------------------------

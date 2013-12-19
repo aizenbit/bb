@@ -1,5 +1,6 @@
 ﻿#include "ui.h"
 #include <QDialog>
+
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -77,6 +78,8 @@ UI::~UI()
     delete menuBar;
     delete creatorsLabel;
     delete aboutTheGameLabel;
+    delete aboutTheGameLabel;
+    delete youWinLable;
     delete newGameWidget;
 }
 
