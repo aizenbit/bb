@@ -12,7 +12,7 @@ UI::UI(QWidget *parent)
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 
-    gameMenu->addAction(tr("&New game"),
+    gameMenu->addAction(tr("&Load Image"),
                         this,
                         SLOT(newGame()));
     gameMenu->addAction(tr("&Hint"),
@@ -21,6 +21,9 @@ UI::UI(QWidget *parent)
     gameMenu->addAction(tr("Show &image"),
                         this,
                         SLOT(showImage()));
+    gameMenu->addAction(tr("Scramble"),
+                        gameMechanics,
+                        SLOT(mixArray()));
 
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));

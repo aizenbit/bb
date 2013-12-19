@@ -17,6 +17,7 @@ private:
         QImage img;
     };
     int pieceCount;
+    bool winflag;
     QImage* image;
     qwaqwa** array;
     QPoint emptyImagePos;
@@ -25,6 +26,7 @@ private:
     TypeOfPainting typeOfPainting;
     virtual void paintEvent(QPaintEvent *); //тут мы рисуем
     void mousePressEvent(QMouseEvent *);
+    void resizeArray();
     //virtual void mousePressEvent(QMouseEvent *event);
 public:
     QString* imageName;
@@ -36,6 +38,8 @@ public slots:
     void newGame();
     void hint();
     void mixArray();
+    int swapEmpty(int x, int y);
+    int checkArray();
     //void qclick();
     void imagePressed(QPointF);
 

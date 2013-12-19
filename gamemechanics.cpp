@@ -3,6 +3,7 @@
 #include <QtCore/qmath.h>
 #include <QLabel>
 #include <QMouseEvent>
+#include <QtDebug>
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
@@ -22,6 +23,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
     typeOfPainting = empty;
+    winflag = true;
 }
 
 //-----------------------------------------
@@ -29,10 +31,20 @@ GameMechanics::GameMechanics(QWidget *parent) :
 void GameMechanics::mixArray()
     //Начинаем перемешивать части картинок по алгоритму
 {
-         for(int x = 0; x < ((pieceCount*pieceCount-1)*(rand()%(9)));x++)
-             array[x/pieceCount][x%pieceCount].img.swap(array[(x+1)/pieceCount][(x+1)%pieceCount].img);
-         for(int y = 0; y < ((pieceCount*pieceCount-1)*(rand()%(7)));y++)//
-             array[y/pieceCount][y%pieceCount].img.swap(array[(y+1)/pieceCount][(y+1)%pieceCount].img);
+    if(typeOfPainting != pieces) return;
+    int mas[2] = {-1,1};
+    int x,y;
+    for(int i = 0; i<51; i++)
+    {
+        //Не совсем эффективно, но работает :D
+        x = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
+        y = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
+        if (!swapEmpty(x,emptyImagePos.y())) i--;
+        else repaint();
+        if (!swapEmpty(emptyImagePos.x(),y)) i--;
+        else repaint(); //Анимируем перестановку ~
+    } //
+    repaint();
 }
 
 //-----------------------------------------
@@ -51,7 +63,16 @@ void GameMechanics::newGame()
                 array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
-   // mixArray();
+    QString *qwaWBS = new QString("whiteblock.jpg");
+    QImage qwaWBtemp(*qwaWBS);
+    qwaWBtemp = qwaWBtemp.scaled(QSize(pieceWidth,pieceHeight));
+    QImage* qwaWB = &qwaWBtemp;
+    array[pieceCount-1][pieceCount-1].img = qwaWB->copy(1,1,pieceWidth,pieceHeight);
+    emptyImagePos.setX(pieceCount-1);
+    emptyImagePos.setY(pieceCount-1);
+    typeOfPainting = pieces;
+    winflag = false;
+    repaint();
 }
 
 //----------------------------------------
@@ -59,7 +80,8 @@ void GameMechanics::newGame()
 void GameMechanics::hint()
 {
     typeOfPainting = fullImage;
-    repaint();}
+    repaint();
+}
 
 //----------------------------------------
 
@@ -100,10 +122,11 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
                 painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
+
         break;
 
     default:
-        painter.drawText(this->width()/2-70,this->height()/2-15,"Please, begin the game");
+        painter.drawText(this->width()/2-70,this->height()/2-15,"Begin the game, please!");//Please, begin the game! так по английски не говорят))
         break;
     };
     painter.end();
@@ -113,7 +136,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->localPos());
+    imagePressed(event->posF());
 }
 
 //----------------------------------------
@@ -122,28 +145,47 @@ void GameMechanics::imagePressed(QPointF pos)
 //Подаем элементы массива того
 //И все равно, мне кажется это странным
 {
-    if(!array[0][0].img.isNull() && typeOfPainting == pieces)
+    if(typeOfPainting == pieces)
     {
         int x = (int)pos.x(); //% pieceWidth;
         int y = (int)pos.y(); //% pieceHeight;
         x /= pieceWidth;
         y /= pieceHeight;
+        if ( x == emptyImagePos.x() && y == emptyImagePos.y()) return;
         //Условие монструозно, но штоподелать, если нет исключающего "или"?
-        if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
-        {
-            qwaqwa tempPiece = array[x][y];
-            array[x][y]= array[emptyImagePos.x()][emptyImagePos.y()];
-            array[emptyImagePos.x()][emptyImagePos.y()] = tempPiece;
-            emptyImagePos.setX(x);
-            emptyImagePos.setY(y);
-            repaint();
-        }
+        //if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
+        swapEmpty(x,y);
+        repaint();
+        if(checkArray()) /* ПОБЕДИЛ */;
     }
     if(typeOfPainting == fullImage)
     {
         typeOfPainting = pieces;
         repaint();
     }
+}
+
+int GameMechanics::swapEmpty(int x, int y) //o_o
+{
+    if( (abs(x-emptyImagePos.x())==1 && y==emptyImagePos.y()) || (abs(y-emptyImagePos.y())==1 && x==emptyImagePos.x()) )
+    {
+        qwaqwa tempPiece = array[x][y];
+        array[x][y]= array[emptyImagePos.x()][emptyImagePos.y()];
+        array[emptyImagePos.x()][emptyImagePos.y()] = tempPiece;
+        emptyImagePos.setX(x);
+        emptyImagePos.setY(y);
+        return 1;
+    }
+    else return 0;
+}
+
+int GameMechanics::checkArray()
+{
+    for(int x = 0; x < pieceCount; x++)
+        for(int y = 0; y < pieceCount; y++)
+            if(array[x][y].x != x || array[x][y].y != y) return 0;
+    winflag = true;
+    return 1;
 }
 
 //----------------------------------------
