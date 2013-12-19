@@ -9,7 +9,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
     imageName = new QString();
-        pieceCount = 2;
+    pieceCount = 3;
     array = new qwaqwa*[pieceCount];
         for (int i = 0; i < pieceCount; i++)
         array[i] = new qwaqwa[pieceCount];
@@ -35,7 +35,7 @@ void GameMechanics::mixArray()
 {
     int mas[2] = {-1,1};
     int x,y;
-    for(int i = 0; i<51; i++)
+    for(int i = 0; i<23*pieceCount; i++)
     {
         x = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
         y = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
@@ -62,7 +62,6 @@ void GameMechanics::newGame()
                 array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
-    typeOfPainting = pieces;
     winflag = false;
     repaint();
     mixArray();
@@ -188,7 +187,8 @@ bool GameMechanics::checkArray()
 
 //----------------------------------------
 
-/*void GameMechanics::win()
+void GameMechanics::changeLevel(int level)
 {
-    //Урааааааааа
-}*/
+    if (level > 1 && level <6)
+    pieceCount = level;
+}

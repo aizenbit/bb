@@ -20,8 +20,14 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
 
     pathLineEdit = new QLineEdit();
 
+    //----------------slider---------------------
+    slider = new QSlider();
+    slider->setRange(3,5);
+    slider->setPageStep(1);
+    slider->setValue(3);
+    slider->setTickPosition(QSlider::TicksBelow);
+
     //------------------connections---------------
-    //connect(okButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
     connect(cancelButton,SIGNAL(clicked()),this,SLOT(close()));
     connect(browseButton,SIGNAL(clicked()),this,SLOT(browse()));
@@ -29,8 +35,7 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     connect(userImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setEnabled(bool)));
     connect(defaultImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setDisabled(bool)));
     connect(userImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setEnabled(bool)));
-    //connect(pathLineEdit,SIGNAL(textChanged(QString)),okButton,SLOT(setEnabled(true)));
-
+    connect(slider,SIGNAL(valueChanged(int)),gameMechanics,SLOT(changeLevel(int)));
     //------------------Layouts------------------
     mainLayout = new QVBoxLayout();
     buttonsLayout = new QHBoxLayout();
@@ -39,11 +44,13 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     buttonsLayout->addWidget(cancelButton);
     pathLayout->addWidget(pathLineEdit);
     pathLayout->addWidget(browseButton);
+    mainLayout->addWidget(slider);
     mainLayout->addWidget(defaultImageRB);
     mainLayout->addWidget(userImageRB);
     mainLayout->addLayout(pathLayout);
     mainLayout->addLayout(buttonsLayout);
     this->setLayout(mainLayout);
+
 }
 
 //-----------------------------------------

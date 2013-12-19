@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QFileDialog>
 #include <QRadioButton>
+#include <QSlider>
 #include "gamemechanics.h"
 
 class NewGameWidget : public QWidget
@@ -26,6 +27,7 @@ private:
     QRadioButton* defaultImageRB;
     QRadioButton* userImageRB;
     GameMechanics* gameMechanics;
+    QSlider* slider;
 
 public:
     NewGameWidget(GameMechanics* gmMechanics, QWidget *parent = 0);

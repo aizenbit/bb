@@ -41,7 +41,8 @@ public slots:
     void mixArray();
     int swapEmpty(int x, int y);
     bool checkArray();
-    void imagePressed(QPointF);            
+    void imagePressed(QPointF);
+    void changeLevel(int level);
 };
 
 #endif // GAMEMECHANICS_H
