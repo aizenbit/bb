@@ -30,7 +30,6 @@ private:
     //virtual void mousePressEvent(QMouseEvent *event);
 public:
     QString *imageName;
-    void deleteImageName();
     GameMechanics(QWidget *parent = 0);
     ~GameMechanics();
 signals:

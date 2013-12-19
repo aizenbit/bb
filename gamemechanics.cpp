@@ -215,7 +215,3 @@ void GameMechanics::changeLevel(int level)
 }
 
 //----------------------------------------
-void GameMechanics::deleteImageName()
-{
-    delete imageName;
-}
