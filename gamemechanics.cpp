@@ -8,7 +8,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
     imageName = new QString();
-    pieceCount = 3;
+    pieceCount = 2;
     array = new Piece*[pieceCount];
     for (int i = 0; i < pieceCount; i++)
         array[i] = new Piece[pieceCount];
@@ -129,7 +129,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->localPos());
+    imagePressed(event->posF());
 }
 
 //----------------------------------------
