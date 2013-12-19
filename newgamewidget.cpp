@@ -6,7 +6,6 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
 {
     setWindowTitle(tr("New Game"));
     gameMechanics = gmMechanics;
-    imageName = gmMechanics->imageName;
     //------------------Buttons------------------
     okButton = new QPushButton(tr("&Ok"));
     cancelButton = new QPushButton(tr("&Cancel"));
@@ -61,20 +60,21 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
 
 void NewGameWidget::newGame()
 {
-    if(pathLineEdit->text() != imageName)
+    if(pathLineEdit->text() != gameMechanics->imageName)
     {
-        delete imageName;
-        imageName = new QString(pathLineEdit->text());
-        gameMechanics->imageName = imageName;
+        //delete gameMechanics->imageName;
+        gameMechanics->imageName = new QString(pathLineEdit->text());
     }
      if (!userImageRB->isChecked())
     {
-        delete imageName;
-        imageName = new QString("://def");
-        gameMechanics->imageName = imageName;
+        //delete gameMechanics->imageName;
+        gameMechanics->imageName = new QString("://resources/default.jpg");
     }
-    if(!imageName->isEmpty())
+    if(!gameMechanics->imageName->isEmpty())
+    {
         gameMechanics->newGame();
+        pathLineEdit->clear();
+    }
     this->close();
 }
 
@@ -85,11 +85,9 @@ void NewGameWidget::browse()
     QString in = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
     if (in.isEmpty())
         return;
-    imageName = &in;
-    pathLineEdit->setText(*imageName);
-    gameMechanics->imageName = imageName;
+    gameMechanics->imageName = &in;
+    pathLineEdit->setText(*gameMechanics->imageName);
     newGame();
-
 }
 
 //-----------------------------------------

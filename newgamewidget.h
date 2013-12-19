@@ -24,7 +24,6 @@ private:
     QPushButton* cancelButton;
     QPushButton* browseButton;
     QLineEdit* pathLineEdit;
-    QString* imageName;
     QRadioButton* defaultImageRB;
     QRadioButton* userImageRB;
     GameMechanics* gameMechanics;

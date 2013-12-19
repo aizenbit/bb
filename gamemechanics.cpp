@@ -83,8 +83,6 @@ void GameMechanics::hint()
 
 GameMechanics::~GameMechanics()
 {
-    //delete imageName; TODO: хз почему, но тут прога выбрасывает исключение
-    //delete image;
         for (int i = 0; i < pieceCount; i++)
                 delete[] array[i];
         delete[] array;
@@ -141,8 +139,6 @@ void GameMechanics::mousePressEvent(QMouseEvent *event)
 //----------------------------------------
 
 void GameMechanics::imagePressed(QPointF pos)
-//Подаем элементы массива того
-//И все равно, мне кажется это странным
 {
     if(typeOfPainting == pieces)
     {
@@ -215,3 +211,7 @@ void GameMechanics::changeLevel(int level)
 }
 
 //----------------------------------------
+void GameMechanics::deleteImageName()
+{
+    delete imageName;
+}
