@@ -10,6 +10,7 @@
 #include <QFileDialog>
 #include <QRadioButton>
 #include <QSlider>
+#include <QLabel>
 #include "gamemechanics.h"
 
 class NewGameWidget : public QWidget
@@ -28,7 +29,7 @@ private:
     QRadioButton* userImageRB;
     GameMechanics* gameMechanics;
     QSlider* slider;
-
+    QLabel* sliderLabel;
 public:
     NewGameWidget(GameMechanics* gmMechanics, QWidget *parent = 0);
     ~NewGameWidget();

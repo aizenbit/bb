@@ -3,7 +3,7 @@
 #include <QtCore/qmath.h>
 #include <QLabel>
 #include <QMouseEvent>
-//#include <QtDebug>
+#include <QtDebug>
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
@@ -20,12 +20,8 @@ GameMechanics::GameMechanics(QWidget *parent) :
             array[x][y].x=x;
             array[x][y].y=y;
         }
-    emptyImagePos.setX(pieceCount-1);
-    emptyImagePos.setY(pieceCount-1);
     typeOfPainting = empty;
     winflag = true;
-    whiteBlock = new QImage("whiteblock.jpg");
-
 }
 
 //-----------------------------------------
@@ -55,8 +51,15 @@ void GameMechanics::newGame()
     pieceHeight = this->height() / pieceCount;
     typeOfPainting = fullImage;
     QImage temp(*imageName);
-    temp = temp.scaled(QSize(this->width(),this->height()));
+
+    temp = temp.scaled(QSize(this->width()+pieceCount,this->height()));
     image = &temp;
+    for (int x = 0; x<pieceCount;x++)
+        for(int y = 0; y<pieceCount;y++)
+        {
+            array[x][y].x=x;
+            array[x][y].y=y;
+        }
     for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
                 array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
@@ -65,6 +68,8 @@ void GameMechanics::newGame()
     winflag = false;
     repaint();
     mixArray();
+    qDebug() << "\n\n\n---------------------\n\n\n" << *imageName;
+    typeOfPainting = fullImage;
 }
 
 //----------------------------------------
@@ -92,6 +97,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 {
     QPainter painter(this);
     painter.begin(this);
+    int n = 0;
     switch(typeOfPainting)
     {
     case pieces:
@@ -101,16 +107,16 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
                 //if( !( (array[x][y].x == emptyImagePos.x()) && (array[x][y].y == emptyImagePos.y()) ) )
-                    painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
+                    painter.drawImage(pieceWidth*x,pieceHeight*y+y,array[x][y].img);
         painter.setPen(QColor(0,0,0));
         painter.setBrush(QColor(255,255,255));
-        painter.drawRect(pieceWidth*emptyImagePos.x(),pieceHeight*emptyImagePos.y(),pieceWidth,pieceHeight);
+        painter.drawRect(pieceWidth*emptyImagePos.x(),pieceHeight*emptyImagePos.y()+emptyImagePos.y(),pieceWidth,pieceHeight);
         //рисуем линии между картинками
 
         for(int x = pieceWidth; x < this->width();x+=pieceWidth)
             painter.drawLine(x,0,x,this->height());
-        for(int y = pieceHeight; y < this->height();y+=pieceHeight)
-            painter.drawLine(0,y,this->width(),y);
+        for(int y = pieceHeight; y < this->height();y+=pieceHeight,n++)
+            painter.drawLine(0,y+n,this->width(),y+n);
         break;
 
     case fullImage:
@@ -130,7 +136,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->posF());
+    imagePressed(event->localPos());
 }
 
 //----------------------------------------
@@ -190,5 +196,20 @@ bool GameMechanics::checkArray()
 void GameMechanics::changeLevel(int level)
 {
     if (level > 1 && level <6)
-    pieceCount = level;
+    {
+        for (int i = 0; i < pieceCount; i++)
+                delete[] array[i];
+        delete[] array;
+        pieceCount = level;
+        array = new qwaqwa*[pieceCount];
+            for (int i = 0; i < pieceCount; i++)
+            array[i] = new qwaqwa[pieceCount];
+
+        for (int x = 0; x<pieceCount;x++)
+            for(int y = 0; y<pieceCount;y++)
+            {
+                array[x][y].x=x;
+                array[x][y].y=y;
+            }
+    }
 }

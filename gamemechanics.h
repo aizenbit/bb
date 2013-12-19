@@ -19,7 +19,6 @@ private:
     int pieceCount;
     bool winflag;
     QImage* image;
-    QImage* whiteBlock;
     qwaqwa** array;
     QPoint emptyImagePos;
     int pieceWidth;
