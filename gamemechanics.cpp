@@ -3,13 +3,13 @@
 #include <QtCore/qmath.h>
 #include <QLabel>
 #include <QMouseEvent>
-#include <QtDebug>
+//#include <QtDebug>
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
     imageName = new QString();
-        pieceCount = 3;
+        pieceCount = 2;
     array = new qwaqwa*[pieceCount];
         for (int i = 0; i < pieceCount; i++)
         array[i] = new qwaqwa[pieceCount];
@@ -24,6 +24,8 @@ GameMechanics::GameMechanics(QWidget *parent) :
     emptyImagePos.setY(pieceCount-1);
     typeOfPainting = empty;
     winflag = true;
+    whiteBlock = new QImage("whiteblock.jpg");
+
 }
 
 //-----------------------------------------
@@ -31,20 +33,17 @@ GameMechanics::GameMechanics(QWidget *parent) :
 void GameMechanics::mixArray()
     //Начинаем перемешивать части картинок по алгоритму
 {
-    if(typeOfPainting != pieces) return;
     int mas[2] = {-1,1};
     int x,y;
     for(int i = 0; i<51; i++)
     {
-        //Не совсем эффективно, но работает :D
         x = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
         y = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
         if (!swapEmpty(x,emptyImagePos.y())) i--;
         else repaint();
         if (!swapEmpty(emptyImagePos.x(),y)) i--;
         else repaint(); //Анимируем перестановку ~
-    } //
-    repaint();
+    }
 }
 
 //-----------------------------------------
@@ -63,16 +62,10 @@ void GameMechanics::newGame()
                 array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
     emptyImagePos.setX(pieceCount-1);
     emptyImagePos.setY(pieceCount-1);
-    QString *qwaWBS = new QString("whiteblock.jpg");
-    QImage qwaWBtemp(*qwaWBS);
-    qwaWBtemp = qwaWBtemp.scaled(QSize(pieceWidth,pieceHeight));
-    QImage* qwaWB = &qwaWBtemp;
-    array[pieceCount-1][pieceCount-1].img = qwaWB->copy(1,1,pieceWidth,pieceHeight);
-    emptyImagePos.setX(pieceCount-1);
-    emptyImagePos.setY(pieceCount-1);
     typeOfPainting = pieces;
     winflag = false;
     repaint();
+    mixArray();
 }
 
 //----------------------------------------
@@ -110,8 +103,11 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
             for(int y = 0; y < pieceCount; y++)
                 //if( !( (array[x][y].x == emptyImagePos.x()) && (array[x][y].y == emptyImagePos.y()) ) )
                     painter.drawImage(pieceWidth*x,pieceHeight*y,array[x][y].img);
-        //рисуем линии между картинками
         painter.setPen(QColor(0,0,0));
+        painter.setBrush(QColor(255,255,255));
+        painter.drawRect(pieceWidth*emptyImagePos.x(),pieceHeight*emptyImagePos.y(),pieceWidth,pieceHeight);
+        //рисуем линии между картинками
+
         for(int x = pieceWidth; x < this->width();x+=pieceWidth)
             painter.drawLine(x,0,x,this->height());
         for(int y = pieceHeight; y < this->height();y+=pieceHeight)
@@ -122,7 +118,6 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
                 painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
-
         break;
 
     default:
@@ -156,7 +151,10 @@ void GameMechanics::imagePressed(QPointF pos)
         //if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
         swapEmpty(x,y);
         repaint();
-        if(checkArray()) /* ПОБЕДИЛ */;
+        if(checkArray())
+        {
+            win();
+        }/* ПОБЕДИЛ */;
     }
     if(typeOfPainting == fullImage)
     {
@@ -165,7 +163,7 @@ void GameMechanics::imagePressed(QPointF pos)
     }
 }
 
-int GameMechanics::swapEmpty(int x, int y) //o_o
+int GameMechanics::swapEmpty(int x, int y)
 {
     if( (abs(x-emptyImagePos.x())==1 && y==emptyImagePos.y()) || (abs(y-emptyImagePos.y())==1 && x==emptyImagePos.x()) )
     {
@@ -179,7 +177,7 @@ int GameMechanics::swapEmpty(int x, int y) //o_o
     else return 0;
 }
 
-int GameMechanics::checkArray()
+bool GameMechanics::checkArray()
 {
     for(int x = 0; x < pieceCount; x++)
         for(int y = 0; y < pieceCount; y++)
@@ -189,3 +187,8 @@ int GameMechanics::checkArray()
 }
 
 //----------------------------------------
+
+/*void GameMechanics::win()
+{
+    //Урааааааааа
+}*/

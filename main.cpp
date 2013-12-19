@@ -1,10 +1,10 @@
 #include "ui.h"
 #include <QApplication>
-#include <QTime>
+#include <time.h>
 
 int main(int argc, char *argv[])
 {
-    srand(5);
+    srand(time(NULL));
     QApplication a(argc, argv);
     QTranslator myTranslator;
     myTranslator.load("bb-" + QLocale::system().name());

@@ -19,6 +19,7 @@ private:
     int pieceCount;
     bool winflag;
     QImage* image;
+    QImage* whiteBlock;
     qwaqwa** array;
     QPoint emptyImagePos;
     int pieceWidth;
@@ -33,16 +34,14 @@ public:
     GameMechanics(QWidget *parent = 0);
     ~GameMechanics();
 signals:
-
+    void win();
 public slots:
     void newGame();
     void hint();
     void mixArray();
     int swapEmpty(int x, int y);
-    int checkArray();
-    //void qclick();
-    void imagePressed(QPointF);
-
+    bool checkArray();
+    void imagePressed(QPointF);            
 };
 
 #endif // GAMEMECHANICS_H

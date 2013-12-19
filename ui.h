@@ -25,14 +25,12 @@ private:
      QLabel* aboutTheGameLabel;//окошко "Об игре"
      NewGameWidget* newGameWidget;//окошко "Новая игра"
      GameMechanics* gameMechanics;//основная механика игры.
-
+     QLabel* youWinLable; //UI на палочке
      friend class NewGameWidget;
 private slots:
      void newGame();
      void aboutTheGame();
      void creators();
-     void showImage();
-
 public:
     UI(QWidget *parent = 0);
     ~UI();

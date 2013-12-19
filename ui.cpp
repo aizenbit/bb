@@ -12,18 +12,12 @@ UI::UI(QWidget *parent)
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
 
-    gameMenu->addAction(tr("&Load Image"),
+    gameMenu->addAction(tr("&New game"),
                         this,
                         SLOT(newGame()));
-    gameMenu->addAction(tr("&Hint"),
+    gameMenu->addAction(tr("Show &image"),
                            gameMechanics,
                            SLOT(hint()));
-    gameMenu->addAction(tr("Show &image"),
-                        this,
-                        SLOT(showImage()));
-    gameMenu->addAction(tr("Scramble"),
-                        gameMechanics,
-                        SLOT(mixArray()));
 
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
@@ -68,8 +62,10 @@ UI::UI(QWidget *parent)
 
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);
-
-
+    //------------------YOU_WIN---------------
+    youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
+                                "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
+    connect(gameMechanics,SIGNAL(win()),youWinLable,SLOT(show()));
 }
 
 //-----------------------------------------
@@ -90,13 +86,6 @@ UI::~UI()
 void UI::newGame()
 {
      newGameWidget->show();
-}
-
-//-----------------------------------------
-
-void UI::showImage()
-{
-
 }
 
 //-----------------------------------------

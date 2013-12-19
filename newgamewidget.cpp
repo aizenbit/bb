@@ -44,8 +44,6 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     mainLayout->addLayout(pathLayout);
     mainLayout->addLayout(buttonsLayout);
     this->setLayout(mainLayout);
-
-
 }
 
 //-----------------------------------------
