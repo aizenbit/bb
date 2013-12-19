@@ -3,7 +3,7 @@
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->setFixedSize(400,350);
+    this->setFixedSize(800,700);
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
     this->setCentralWidget(gameMechanics);
