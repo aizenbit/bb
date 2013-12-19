@@ -1,8 +1,10 @@
 ﻿#include "ui.h"
-
+#include <QDialog>
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
+    dialog = new QDialog();
+    dialog->setModal(true);
     this->setFixedSize(400,350);
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
@@ -91,6 +93,7 @@ void UI::newGame()
 
 void UI::aboutTheGame()
 {
+    //dialog->setLayout();
     aboutTheGameLabel->show();
 }
 

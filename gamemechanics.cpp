@@ -10,9 +10,9 @@ GameMechanics::GameMechanics(QWidget *parent) :
 {
     imageName = new QString();
     pieceCount = 3;
-    array = new qwaqwa*[pieceCount];
+    array = new Piece*[pieceCount];
         for (int i = 0; i < pieceCount; i++)
-        array[i] = new qwaqwa[pieceCount];
+        array[i] = new Piece[pieceCount];
 
     for (int x = 0; x < pieceCount; x++)
         for(int y = 0; y < pieceCount; y++)
@@ -140,11 +140,12 @@ void GameMechanics::imagePressed(QPointF pos)
 {
     if(typeOfPainting == pieces)
     {
-        int x = (int)pos.x(); //% pieceWidth;
-        int y = (int)pos.y(); //% pieceHeight;
+        int x = (int)pos.x();
+        int y = (int)pos.y();
         x /= pieceWidth;
         y /= pieceHeight;
-        if ( x == emptyImagePos.x() && y == emptyImagePos.y()) return;
+        if ( x == emptyImagePos.x() && y == emptyImagePos.y())
+            return;
         swapEmpty(x,y);
         repaint();
         if(checkArray())
@@ -164,7 +165,7 @@ int GameMechanics::swapEmpty(int x, int y)
 {
     if( (abs(x - emptyImagePos.x()) == 1 && y == emptyImagePos.y()) || (abs(y - emptyImagePos.y()) == 1 && x == emptyImagePos.x()) )
     {
-        qwaqwa tempPiece = array[x][y];
+        Piece tempPiece = array[x][y];
         array[x][y] = array[emptyImagePos.x()][emptyImagePos.y()];
         array[emptyImagePos.x()][emptyImagePos.y()] = tempPiece;
         emptyImagePos.setX(x);
@@ -195,9 +196,9 @@ void GameMechanics::changeLevel(int level)
                 delete[] array[i];
         delete[] array;
         pieceCount = level;
-        array = new qwaqwa*[pieceCount];
+        array = new Piece*[pieceCount];
             for (int i = 0; i < pieceCount; i++)
-            array[i] = new qwaqwa[pieceCount];
+            array[i] = new Piece[pieceCount];
 
         for (int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)

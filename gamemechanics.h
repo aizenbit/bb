@@ -11,7 +11,7 @@ class GameMechanics : public QWidget
     Q_OBJECT
 enum TypeOfPainting {fullImage, pieces, empty};
 private:
-    struct qwaqwa
+    struct Piece
     {
         int x, y;
         QImage img;
@@ -19,7 +19,7 @@ private:
     int pieceCount;
     bool winflag;
     QImage *image;
-    qwaqwa **array;
+    Piece **array;
     QPoint emptyImagePos;
     int pieceWidth;
     int pieceHeight;

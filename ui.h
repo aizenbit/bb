@@ -15,10 +15,11 @@ class UI : public QMainWindow
     Q_OBJECT
 
 private:
+     QDialog *dialog;
      QMenu *gameMenu; //меню "Игра"
-     QMenu *aboutMenu; //меню "Справка" или что-то в этом роде
+     QMenu *aboutMenu; //меню "Справка"
      QMenuBar *menuBar; //панель меню
-     QLabel *creatorsLabel; //окошко "О создателях"
+     QLabel *creatorsLabel; //окошко "Об авторах"
      QLabel *aboutTheGameLabel;//окошко "Об игре"
      NewGameWidget *newGameWidget;//окошко "Новая игра"
      GameMechanics *gameMechanics;//основная механика игры.
