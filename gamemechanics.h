@@ -1,4 +1,6 @@
-
+/*
+ * Игровая механика
+ */
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
@@ -9,39 +11,42 @@
 class GameMechanics : public QWidget
 {
     Q_OBJECT
+
 enum TypeOfPainting {fullImage, pieces, empty};
+
 private:
     struct Piece
     {
         int x, y;
         QImage img;
     };
-    int pieceCount;
-    bool winflag;
-    QImage *image;
-    Piece **array;
-    QPoint emptyImagePos;
-    int pieceWidth;
-    int pieceHeight;
-    TypeOfPainting typeOfPainting;
-    virtual void paintEvent(QPaintEvent *); //тут мы рисуем
-    void mousePressEvent(QMouseEvent *);
-    void resizeArray();
-    //virtual void mousePressEvent(QMouseEvent *event);
+    int pieceCount;//количество картинок
+    bool winflag;//выиграл или ещё нет
+    QImage *image;//исходное изображение
+    Piece **array;//массив кусочков изображения
+    QPoint emptyImagePos;//позиция пустого кусочка
+    int pieceWidth;//длина кусочка
+    int pieceHeight;//высота кусочка
+    TypeOfPainting typeOfPainting;//что именно рисовать
+    void paintEvent(QPaintEvent *); //тут мы рисуем
+    void mousePressEvent(QMouseEvent *); //обработка нажатий мыши
+    void mixArray(); //перемешивание кусочков
+    bool swapEmpty(int, int); //перемещение кусочка с картинкой на пустое место
+    bool checkArray(); //проверка на выигрыш
+    void imagePressed(QPointF); //обработка нажатия на картинку
+
 public:
-    QString *imageName;
+    QString *imageName; //путь к картинке
     GameMechanics(QWidget *parent = 0);
     ~GameMechanics();
+
 signals:
-    void win();
+    void win(); //сигнал выигрыша
+
 public slots:
-    void newGame();
-    void hint();
-    void mixArray();
-    int swapEmpty(int, int);
-    bool checkArray();
-    void imagePressed(QPointF);
-    void changeLevel(int);
+    void newGame(); //начало новой игры
+    void showImage(); //вывод полной картинки на экран
+    void changeLevel(int); //изменение уровня сложности
 };
 
 #endif // GAMEMECHANICS_H

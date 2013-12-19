@@ -5,7 +5,9 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     QWidget(parent)
 {
     setWindowTitle(tr("New Game"));
+
     gameMechanics = gmMechanics;
+
     //------------------Buttons------------------
     okButton = new QPushButton(tr("&Ok"));
     cancelButton = new QPushButton(tr("&Cancel"));
@@ -37,6 +39,7 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     connect(defaultImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setDisabled(bool)));
     connect(userImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setEnabled(bool)));
     connect(slider, SIGNAL(valueChanged(int)), gameMechanics, SLOT(changeLevel(int)));
+
     //------------------Layouts------------------
     mainLayout = new QVBoxLayout();
     buttonsLayout = new QHBoxLayout();
@@ -61,15 +64,11 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
 void NewGameWidget::newGame()
 {
     if(pathLineEdit->text() != gameMechanics->imageName)
-    {
-        //delete gameMechanics->imageName;
         gameMechanics->imageName = new QString(pathLineEdit->text());
-    }
-     if (!userImageRB->isChecked())
-    {
-        //delete gameMechanics->imageName;
+
+    if (!userImageRB->isChecked())
         gameMechanics->imageName = new QString("://resources/default.jpg");
-    }
+
     if(!gameMechanics->imageName->isEmpty())
     {
         gameMechanics->newGame();
@@ -83,8 +82,10 @@ void NewGameWidget::newGame()
 void NewGameWidget::browse()
 {
     QString in = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
+
     if (in.isEmpty())
         return;
+
     gameMechanics->imageName = &in;
     pathLineEdit->setText(*gameMechanics->imageName);
     newGame();

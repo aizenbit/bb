@@ -17,27 +17,24 @@ class NewGameWidget : public QWidget
 {
     Q_OBJECT
 private:
-    QVBoxLayout *mainLayout;
+    QVBoxLayout *mainLayout;//планировка виджетов
     QHBoxLayout *pathLayout;
     QHBoxLayout *buttonsLayout;
-    QPushButton *okButton;
+    QPushButton *okButton; //кнопки
     QPushButton *cancelButton;
     QPushButton *browseButton;
-    QLineEdit *pathLineEdit;
-    QRadioButton *defaultImageRB;
+    QLineEdit *pathLineEdit; //строка с путём к файлу
+    QRadioButton *defaultImageRB; //переключатель
     QRadioButton *userImageRB;
-    GameMechanics *gameMechanics;
-    QSlider *slider;
-    QLabel *sliderLabel;
+    GameMechanics *gameMechanics; //игровая механика
+    QSlider *slider; //ползунок выбора сложности
+    QLabel *sliderLabel; //надпись над ползунком
+private slots:
+    void newGame();
+    void browse();
 public:
     NewGameWidget(GameMechanics *, QWidget *parent = 0);
     ~NewGameWidget();
-
-signals:
-
-public slots:
-    void newGame();
-    void browse();
 };
 
 #endif // NEWGAMEWIDGET_H

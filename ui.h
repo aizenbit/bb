@@ -22,17 +22,17 @@ private:
      QLabel *aboutTheGameLabel;//окошко "Об игре"
      NewGameWidget *newGameWidget;//окошко "Новая игра"
      GameMechanics *gameMechanics;//основная механика игры.
-     QLabel *youWinLable; //UI на палочке
-     friend class NewGameWidget;
+     QLabel *youWinLable; //табличка "Вы выиграли"
+     friend class NewGameWidget; //делаем окошко "Новая игра" дружественным
+
 private slots:
-     void newGame();
-     void aboutTheGame();
-     void creators();
+     void newGame(); //начало новой игры
+     void aboutTheGame(); //вывод окна "об игре"
+     void creators(); //вывод окна "Об авторах"
+
 public:
     UI(QWidget *parent = 0);
     ~UI();
 };
 
 #endif // UI_H
-
-//тестовая строчка

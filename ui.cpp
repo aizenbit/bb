@@ -16,7 +16,7 @@ UI::UI(QWidget *parent)
                         SLOT(newGame()));
     gameMenu->addAction(tr("Show &image"),
                            gameMechanics,
-                           SLOT(hint()));
+                           SLOT(showImage()));
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
     aboutMenu->addAction(tr("About the &game"),
