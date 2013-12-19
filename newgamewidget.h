@@ -1,3 +1,6 @@
+/*
+ *  Окошко "Новая игра"
+ */
 #ifndef NEWGAMEWIDGET_H
 #define NEWGAMEWIDGET_H
 

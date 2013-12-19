@@ -1,5 +1,5 @@
 /*
- * Игровая механика
+ *  Игровая механика
  */
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
