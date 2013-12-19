@@ -9,9 +9,9 @@ GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
     imageName = new QString();
-    pieceCount = 2;
+    pieceCount = 3;
     array = new Piece*[pieceCount];
-        for (int i = 0; i < pieceCount; i++)
+    for (int i = 0; i < pieceCount; i++)
         array[i] = new Piece[pieceCount];
 
     for (int x = 0; x < pieceCount; x++)

@@ -15,7 +15,6 @@ class UI : public QMainWindow
     Q_OBJECT
 
 private:
-     QDialog *dialog;
      QMenu *gameMenu; //меню "Игра"
      QMenu *aboutMenu; //меню "Справка"
      QMenuBar *menuBar; //панель меню
