@@ -13,7 +13,7 @@ enum TypeOfPainting {fullImage, pieces, empty};
 private:
     struct qwaqwa
     {
-        int x,y;
+        int x, y;
         QImage img;
     };
     int pieceCount;
@@ -38,10 +38,10 @@ public slots:
     void newGame();
     void hint();
     void mixArray();
-    int swapEmpty(int x, int y);
+    int swapEmpty(int, int);
     bool checkArray();
     void imagePressed(QPointF);
-    void changeLevel(int level);
+    void changeLevel(int);
 };
 
 #endif // GAMEMECHANICS_H

@@ -9,7 +9,6 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     imageName = gmMechanics->imageName;
     //------------------Buttons------------------
     okButton = new QPushButton(tr("&Ok"));
-    //okButton->setDisabled(true);
     cancelButton = new QPushButton(tr("&Cancel"));
     browseButton = new QPushButton(tr("&Browse"));
 
@@ -31,14 +30,14 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
                                         "<CENTER>low\t     medium\thigh</CENTER><pre>"));
 
     //------------------connections---------------
-    connect(okButton,SIGNAL(clicked()),this,SLOT(newGame()));
-    connect(cancelButton,SIGNAL(clicked()),this,SLOT(close()));
-    connect(browseButton,SIGNAL(clicked()),this,SLOT(browse()));
+    connect(okButton, SIGNAL(clicked()) ,this, SLOT(newGame()));
+    connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
     connect(defaultImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setDisabled(bool)));
     connect(userImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setEnabled(bool)));
     connect(defaultImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setDisabled(bool)));
     connect(userImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setEnabled(bool)));
-    connect(slider,SIGNAL(valueChanged(int)),gameMechanics,SLOT(changeLevel(int)));
+    connect(slider, SIGNAL(valueChanged(int)), gameMechanics, SLOT(changeLevel(int)));
     //------------------Layouts------------------
     mainLayout = new QVBoxLayout();
     buttonsLayout = new QHBoxLayout();
@@ -54,7 +53,7 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     mainLayout->addLayout(pathLayout);
     mainLayout->addLayout(buttonsLayout);
     this->setLayout(mainLayout);
-    this->setFixedSize(300,220);
+    this->setFixedSize(300, 220);
 
 }
 
@@ -66,17 +65,16 @@ void NewGameWidget::newGame()
     {
         delete imageName;
         imageName = new QString(pathLineEdit->text());
-        gameMechanics->imageName=imageName;
+        gameMechanics->imageName = imageName;
     }
      if (!userImageRB->isChecked())
     {
         delete imageName;
-        imageName = new QString("default.jpg");
-        gameMechanics->imageName=imageName;
+        imageName = new QString("://def");
+        gameMechanics->imageName = imageName;
     }
     if(!imageName->isEmpty())
         gameMechanics->newGame();
-
     this->close();
 }
 
@@ -89,7 +87,7 @@ void NewGameWidget::browse()
         return;
     imageName = &in;
     pathLineEdit->setText(*imageName);
-    gameMechanics->imageName=imageName;
+    gameMechanics->imageName = imageName;
     newGame();
 
 }
@@ -109,3 +107,5 @@ NewGameWidget::~NewGameWidget()
     delete mainLayout;
     delete gameMechanics;
 }
+
+//----------------------------------------

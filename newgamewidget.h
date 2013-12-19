@@ -31,7 +31,7 @@ private:
     QSlider* slider;
     QLabel* sliderLabel;
 public:
-    NewGameWidget(GameMechanics* gmMechanics, QWidget *parent = 0);
+    NewGameWidget(GameMechanics*, QWidget *parent = 0);
     ~NewGameWidget();
 
 signals:

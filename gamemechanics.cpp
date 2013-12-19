@@ -44,7 +44,6 @@ void GameMechanics::mixArray()
 
 //-----------------------------------------
 
-
 void GameMechanics::newGame()
 {
     pieceWidth = this->width() / pieceCount;
@@ -52,13 +51,13 @@ void GameMechanics::newGame()
     typeOfPainting = fullImage;
     QImage temp(*imageName);
 
-    temp = temp.scaled(QSize(this->width()+pieceCount,this->height()));
+    temp = temp.scaled(QSize(this->width() + pieceCount, this->height()));
     image = &temp;
-    for (int x = 0; x<pieceCount;x++)
-        for(int y = 0; y<pieceCount;y++)
+    for (int x = 0; x < pieceCount; x++)
+        for(int y = 0; y < pieceCount; y++)
         {
-            array[x][y].x=x;
-            array[x][y].y=y;
+            array[x][y].x = x;
+            array[x][y].y = y;
         }
     for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
@@ -122,11 +121,11 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
     case fullImage:
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
-                painter.drawImage(pieceWidth*array[x][y].x,pieceHeight*array[x][y].y,array[x][y].img);
+                painter.drawImage(pieceWidth*array[x][y].x, pieceHeight*array[x][y].y, array[x][y].img);
         break;
 
     default:
-        painter.drawText(this->width()/2-70,this->height()/2-15,"Begin the game, please!");//Please, begin the game! так по английски не говорят))
+        painter.drawText(this->width() / 2 - 70, this->height() / 2 - 15, "Begin the game, please!");
         break;
     };
     painter.end();
@@ -152,14 +151,11 @@ void GameMechanics::imagePressed(QPointF pos)
         x /= pieceWidth;
         y /= pieceHeight;
         if ( x == emptyImagePos.x() && y == emptyImagePos.y()) return;
-        //Условие монструозно, но штоподелать, если нет исключающего "или"?
-        //if( ((abs(x - emptyImagePos.x()) == 1) || (abs(y - emptyImagePos.y()) == 1)) && !((abs(x - emptyImagePos.x()) == 1) && (abs(y - emptyImagePos.y()) == 1)) )
         swapEmpty(x,y);
         repaint();
         if(checkArray())
-        {
             win();
-        }/* ПОБЕДИЛ */;
+
     }
     if(typeOfPainting == fullImage)
     {
@@ -168,12 +164,14 @@ void GameMechanics::imagePressed(QPointF pos)
     }
 }
 
+//----------------------------------------
+
 int GameMechanics::swapEmpty(int x, int y)
 {
-    if( (abs(x-emptyImagePos.x())==1 && y==emptyImagePos.y()) || (abs(y-emptyImagePos.y())==1 && x==emptyImagePos.x()) )
+    if( (abs(x - emptyImagePos.x()) == 1 && y == emptyImagePos.y()) || (abs(y - emptyImagePos.y()) == 1 && x == emptyImagePos.x()) )
     {
         qwaqwa tempPiece = array[x][y];
-        array[x][y]= array[emptyImagePos.x()][emptyImagePos.y()];
+        array[x][y] = array[emptyImagePos.x()][emptyImagePos.y()];
         array[emptyImagePos.x()][emptyImagePos.y()] = tempPiece;
         emptyImagePos.setX(x);
         emptyImagePos.setY(y);
@@ -181,6 +179,8 @@ int GameMechanics::swapEmpty(int x, int y)
     }
     else return 0;
 }
+
+//----------------------------------------
 
 bool GameMechanics::checkArray()
 {
@@ -205,11 +205,13 @@ void GameMechanics::changeLevel(int level)
             for (int i = 0; i < pieceCount; i++)
             array[i] = new qwaqwa[pieceCount];
 
-        for (int x = 0; x<pieceCount;x++)
-            for(int y = 0; y<pieceCount;y++)
+        for (int x = 0; x < pieceCount; x++)
+            for(int y = 0; y < pieceCount; y++)
             {
-                array[x][y].x=x;
-                array[x][y].y=y;
+                array[x][y].x = x;
+                array[x][y].y = y;
             }
     }
 }
+
+//----------------------------------------

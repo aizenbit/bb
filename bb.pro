@@ -22,3 +22,6 @@ HEADERS  += ui.h \
     newgamewidget.h
 
 TRANSLATIONS += bb-ru_RU.ts
+
+RESOURCES += \
+    resources.qrc

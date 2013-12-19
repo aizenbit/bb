@@ -4,7 +4,6 @@ UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setFixedSize(400,350);
-    qDebug() << "hello!";
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
     this->setCentralWidget(gameMechanics);
@@ -61,6 +60,7 @@ UI::UI(QWidget *parent)
 
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);
+
     //------------------YOU_WIN---------------
     youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
                                 "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
