@@ -1,7 +1,7 @@
 #include "newgamewidget.h"
 #include "ui.h"
 
-NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
+NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     QWidget(parent)
 {
     setWindowTitle(tr("New Game"));
@@ -25,7 +25,7 @@ NewGameWidget::NewGameWidget(GameMechanics* gmMechanics, QWidget *parent) :
     slider->setValue(3);
     slider->setTickPosition(QSlider::TicksBelow);
     slider->setOrientation(Qt::Horizontal);
-    QLabel* sliderLabel = new QLabel(tr("<pre><CENTER>Choose level:</CENTER>\n"
+    QLabel *sliderLabel = new QLabel(tr("<pre><CENTER>Choose level:</CENTER>\n"
                                         "<CENTER>low\t     medium\thigh</CENTER><pre>"));
 
     //------------------connections---------------

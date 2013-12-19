@@ -14,11 +14,11 @@ GameMechanics::GameMechanics(QWidget *parent) :
         for (int i = 0; i < pieceCount; i++)
         array[i] = new qwaqwa[pieceCount];
 
-    for (int x = 0; x<pieceCount;x++)
-        for(int y = 0; y<pieceCount;y++)
+    for (int x = 0; x < pieceCount; x++)
+        for(int y = 0; y < pieceCount; y++)
         {
-            array[x][y].x=x;
-            array[x][y].y=y;
+            array[x][y].x = x;
+            array[x][y].y = y;
         }
     typeOfPainting = empty;
     winflag = true;
@@ -30,15 +30,15 @@ void GameMechanics::mixArray()
     //Начинаем перемешивать части картинок по алгоритму
 {
     int mas[2] = {-1,1};
-    int x,y;
-    for(int i = 0; i<23*pieceCount; i++)
+    int x, y;
+    for(int i = 0; i<23 * pieceCount; i++)
     {
-        x = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
-        y = abs((mas[rand()%2]+emptyImagePos.x())%pieceCount);
-        if (!swapEmpty(x,emptyImagePos.y())) i--;
-        else repaint();
-        if (!swapEmpty(emptyImagePos.x(),y)) i--;
-        else repaint(); //Анимируем перестановку ~
+        x = abs((mas[rand() % 2] + emptyImagePos.x()) % pieceCount);
+        y = abs((mas[rand() % 2] + emptyImagePos.x()) % pieceCount);
+        if (!swapEmpty(x, emptyImagePos.y()))
+            i--;
+        if (!swapEmpty(emptyImagePos.x(), y))
+            i--;
     }
 }
 
@@ -50,7 +50,6 @@ void GameMechanics::newGame()
     pieceHeight = this->height() / pieceCount;
     typeOfPainting = fullImage;
     QImage temp(*imageName);
-
     temp = temp.scaled(QSize(this->width() + pieceCount, this->height()));
     image = &temp;
     for (int x = 0; x < pieceCount; x++)
@@ -61,9 +60,9 @@ void GameMechanics::newGame()
         }
     for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
-                array[x][y].img = image->copy(pieceWidth*x,pieceHeight*y,pieceWidth,pieceHeight);
-    emptyImagePos.setX(pieceCount-1);
-    emptyImagePos.setY(pieceCount-1);
+                array[x][y].img = image->copy(pieceWidth * x, pieceHeight * y, pieceWidth, pieceHeight);
+    emptyImagePos.setX(pieceCount - 1);
+    emptyImagePos.setY(pieceCount - 1);
     winflag = false;
     repaint();
     mixArray();
@@ -98,28 +97,27 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
     switch(typeOfPainting)
     {
     case pieces:
-        pieceWidth = this->width()/pieceCount;
-        pieceHeight = this->height()/pieceCount;
+        pieceWidth = this->width() / pieceCount;
+        pieceHeight = this->height() / pieceCount;
         //рисуем картинки
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
-                //if( !( (array[x][y].x == emptyImagePos.x()) && (array[x][y].y == emptyImagePos.y()) ) )
-                    painter.drawImage(pieceWidth*x,pieceHeight*y+y,array[x][y].img);
-        painter.setPen(QColor(0,0,0));
-        painter.setBrush(QColor(255,255,255));
-        painter.drawRect(pieceWidth*emptyImagePos.x(),pieceHeight*emptyImagePos.y()+emptyImagePos.y(),pieceWidth,pieceHeight);
+                    painter.drawImage(pieceWidth * x,pieceHeight * y + y, array[x][y].img);
+        painter.setPen(QColor(0, 0, 0));
+        painter.setBrush(QColor(255, 255, 255));
+        painter.drawRect(pieceWidth * emptyImagePos.x(), pieceHeight * emptyImagePos.y() + emptyImagePos.y(), pieceWidth, pieceHeight);
         //рисуем линии между картинками
 
-        for(int x = pieceWidth; x < this->width();x+=pieceWidth)
-            painter.drawLine(x,0,x,this->height());
-        for(int y = pieceHeight; y < this->height();y+=pieceHeight,n++)
-            painter.drawLine(0,y+n,this->width(),y+n);
+        for(int x = pieceWidth; x < this->width(); x += pieceWidth)
+            painter.drawLine(x, 0, x, this->height());
+        for(int y = pieceHeight; y < this->height(); y += pieceHeight, n++)
+            painter.drawLine(0, y + n, this->width(), y+n);
         break;
 
     case fullImage:
         for(int x = 0; x < pieceCount; x++)
             for(int y = 0; y < pieceCount; y++)
-                painter.drawImage(pieceWidth*array[x][y].x, pieceHeight*array[x][y].y, array[x][y].img);
+                painter.drawImage(pieceWidth * array[x][y].x, pieceHeight * array[x][y].y, array[x][y].img);
         break;
 
     default:

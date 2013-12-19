@@ -17,20 +17,20 @@ class NewGameWidget : public QWidget
 {
     Q_OBJECT
 private:
-    QVBoxLayout* mainLayout;
-    QHBoxLayout* pathLayout;
-    QHBoxLayout* buttonsLayout;
-    QPushButton* okButton;
-    QPushButton* cancelButton;
-    QPushButton* browseButton;
-    QLineEdit* pathLineEdit;
-    QRadioButton* defaultImageRB;
-    QRadioButton* userImageRB;
-    GameMechanics* gameMechanics;
-    QSlider* slider;
-    QLabel* sliderLabel;
+    QVBoxLayout *mainLayout;
+    QHBoxLayout *pathLayout;
+    QHBoxLayout *buttonsLayout;
+    QPushButton *okButton;
+    QPushButton *cancelButton;
+    QPushButton *browseButton;
+    QLineEdit *pathLineEdit;
+    QRadioButton *defaultImageRB;
+    QRadioButton *userImageRB;
+    GameMechanics *gameMechanics;
+    QSlider *slider;
+    QLabel *sliderLabel;
 public:
-    NewGameWidget(GameMechanics*, QWidget *parent = 0);
+    NewGameWidget(GameMechanics *, QWidget *parent = 0);
     ~NewGameWidget();
 
 signals:

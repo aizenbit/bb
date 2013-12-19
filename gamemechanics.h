@@ -18,8 +18,8 @@ private:
     };
     int pieceCount;
     bool winflag;
-    QImage* image;
-    qwaqwa** array;
+    QImage *image;
+    qwaqwa **array;
     QPoint emptyImagePos;
     int pieceWidth;
     int pieceHeight;
@@ -29,7 +29,7 @@ private:
     void resizeArray();
     //virtual void mousePressEvent(QMouseEvent *event);
 public:
-    QString* imageName;
+    QString *imageName;
     void deleteImageName();
     GameMechanics(QWidget *parent = 0);
     ~GameMechanics();

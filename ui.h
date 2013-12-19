@@ -1,6 +1,3 @@
-/*
- *  Главное окно программы
- */
 #ifndef UI_H
 #define UI_H
 
@@ -18,14 +15,14 @@ class UI : public QMainWindow
     Q_OBJECT
 
 private:
-     QMenu* gameMenu; //меню "Игра"
-     QMenu* aboutMenu; //меню "Справка" или что-то в этом роде
-     QMenuBar* menuBar; //панель меню
-     QLabel* creatorsLabel; //окошко "О создателях"
-     QLabel* aboutTheGameLabel;//окошко "Об игре"
-     NewGameWidget* newGameWidget;//окошко "Новая игра"
-     GameMechanics* gameMechanics;//основная механика игры.
-     QLabel* youWinLable; //UI на палочке
+     QMenu *gameMenu; //меню "Игра"
+     QMenu *aboutMenu; //меню "Справка" или что-то в этом роде
+     QMenuBar *menuBar; //панель меню
+     QLabel *creatorsLabel; //окошко "О создателях"
+     QLabel *aboutTheGameLabel;//окошко "Об игре"
+     NewGameWidget *newGameWidget;//окошко "Новая игра"
+     GameMechanics *gameMechanics;//основная механика игры.
+     QLabel *youWinLable; //UI на палочке
      friend class NewGameWidget;
 private slots:
      void newGame();
