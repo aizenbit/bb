@@ -12,8 +12,8 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     browseButton = new QPushButton(tr("&Browse"));
 
     //------------------RadioButtons-------------
-    defaultImageRB = new QRadioButton(tr("Default image"));
-    userImageRB = new QRadioButton(tr("User image"));
+    defaultImageRB = new QRadioButton(tr("&Default image"));
+    userImageRB = new QRadioButton(tr("&User image"));
     userImageRB->setChecked(true);
 
     pathLineEdit = new QLineEdit();

@@ -9,7 +9,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
     imageName = new QString();
-    pieceCount = 3;
+    pieceCount = 2;
     array = new Piece*[pieceCount];
         for (int i = 0; i < pieceCount; i++)
         array[i] = new Piece[pieceCount];
@@ -21,7 +21,7 @@ GameMechanics::GameMechanics(QWidget *parent) :
             array[x][y].y = y;
         }
     typeOfPainting = empty;
-    winflag = true;
+    winflag = false;
 }
 
 //-----------------------------------------
@@ -148,13 +148,20 @@ void GameMechanics::imagePressed(QPointF pos)
             return;
         swapEmpty(x,y);
         repaint();
-        if(checkArray())
+        if(!winflag && checkArray())
+        {
             win();
+            typeOfPainting = fullImage;
+        }
 
     }
-    if(typeOfPainting == fullImage)
+    if(typeOfPainting == fullImage && !winflag)
     {
         typeOfPainting = pieces;
+        repaint();
+    }
+    if(typeOfPainting == fullImage && winflag)
+    {
         repaint();
     }
 }

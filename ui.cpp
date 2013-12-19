@@ -3,8 +3,6 @@
 UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
-    dialog = new QDialog();
-    dialog->setModal(true);
     this->setFixedSize(400,350);
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
@@ -21,10 +19,10 @@ UI::UI(QWidget *parent)
                            SLOT(hint()));
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
-    aboutMenu->addAction(tr("About the game"),
+    aboutMenu->addAction(tr("About the &game"),
                         this,
                         SLOT(aboutTheGame()));
-    aboutMenu->addAction(tr("Creators"),
+    aboutMenu->addAction(tr("&Creators"),
                         this,
                         SLOT(creators()));
 
@@ -67,6 +65,7 @@ UI::UI(QWidget *parent)
     youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
                                 "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
     connect(gameMechanics,SIGNAL(win()),youWinLable,SLOT(show()));
+
 }
 
 //-----------------------------------------
@@ -93,7 +92,6 @@ void UI::newGame()
 
 void UI::aboutTheGame()
 {
-    //dialog->setLayout();
     aboutTheGameLabel->show();
 }
 
