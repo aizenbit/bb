@@ -40,7 +40,7 @@ UI::UI(QWidget *parent)
                                    "<CENTER>The best of the best!</CENTER>"
                                    "<CENTER>Very intresting game!</CENTER>"
                                    "<CENTER>Creators: aizenbit && den5509</CENTER>"));
-    creatorsLabel->setWindowTitle(tr("&Creators"));
+    creatorsLabel->setWindowTitle(tr("Creators"));
 
     //------------------aboutTheGameLabel------------
     aboutTheGameLabel = new QLabel(tr(
@@ -57,7 +57,7 @@ UI::UI(QWidget *parent)
                                        "\tmoves that use the empty space.\t<br>"
                                        "                                                              (c) Wiki<br><br></pre>"
                                        ));
-    aboutTheGameLabel->setWindowTitle(tr("About the &game"));
+    aboutTheGameLabel->setWindowTitle(tr("About the game"));
 
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);
@@ -65,6 +65,7 @@ UI::UI(QWidget *parent)
     //------------------YOU_WIN---------------
     youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
                                 "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
+    youWinLable->setWindowTitle(tr("YOU WIN!"));
     connect(gameMechanics,SIGNAL(win()),youWinLable,SLOT(show()));
 
 }
