@@ -9,30 +9,6 @@ UI::UI(QWidget *parent)
     gameMechanics = new GameMechanics();
     this->setCentralWidget(gameMechanics);
 
-    //------------------gameMenu--------------------
-    gameMenu = new QMenu(tr("&Game"));
-
-    gameMenu->addAction(tr("&New game"),
-                        this,
-                        SLOT(newGame()));
-    gameMenu->addAction(tr("Show &image"),
-                           gameMechanics,
-                           SLOT(showImage()));
-    //------------------aboutMenu--------------------
-    aboutMenu = new QMenu(tr("&About"));
-    aboutMenu->addAction(tr("About the &game"),
-                        this,
-                        SLOT(aboutTheGame()));
-    aboutMenu->addAction(tr("&Creators"),
-                        this,
-                        SLOT(creators()));
-
-    //------------------menuBar----------------------
-    menuBar = new QMenuBar();
-    menuBar->addMenu(gameMenu);
-    menuBar->addMenu(aboutMenu);
-    this->setMenuBar(menuBar);
-
     //------------------creatorsLabel----------------
     creatorsLabel = new QLabel(tr(
                                    "<H1><CENTER>bb</CENTER></H1>"
@@ -62,6 +38,29 @@ UI::UI(QWidget *parent)
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);
 
+    //------------------gameMenu--------------------
+    gameMenu = new QMenu(tr("&Game"));
+    gameMenu->addAction(tr("&New game"),
+                        newGameWidget,
+                        SLOT(show()));
+    gameMenu->addAction(tr("Show &image"),
+                           gameMechanics,
+                           SLOT(showImage()));
+    //------------------aboutMenu--------------------
+    aboutMenu = new QMenu(tr("&About"));
+    aboutMenu->addAction(tr("About the &game"),
+                        aboutTheGameLabel,
+                        SLOT(show()));
+    aboutMenu->addAction(tr("&Creators"),
+                        creatorsLabel,
+                        SLOT(show()));
+
+    //------------------menuBar----------------------
+    menuBar = new QMenuBar();
+    menuBar->addMenu(gameMenu);
+    menuBar->addMenu(aboutMenu);
+    this->setMenuBar(menuBar);
+
     //------------------YOU_WIN---------------
     youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
                                 "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
@@ -82,27 +81,6 @@ UI::~UI()
     delete aboutTheGameLabel;
     delete youWinLable;
     delete newGameWidget;
-}
-
-//-----------------------------------------
-
-void UI::newGame()
-{
-     newGameWidget->show();
-}
-
-//-----------------------------------------
-
-void UI::aboutTheGame()
-{
-    aboutTheGameLabel->show();
-}
-
-//-----------------------------------------
-
-void UI::creators()
-{
-    creatorsLabel->show();
 }
 
 //-----------------------------------------

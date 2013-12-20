@@ -29,11 +29,6 @@ private:
      QLabel *youWinLable; //табличка "Вы выиграли"
      friend class NewGameWidget; //делаем окошко "Новая игра" дружественным
 
-private slots:
-     void newGame(); //начало новой игры
-     void aboutTheGame(); //вывод окна "об игре"
-     void creators(); //вывод окна "Об авторах"
-
 public:
     UI(QWidget *parent = 0);
     ~UI();
