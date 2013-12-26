@@ -1,6 +1,13 @@
 #include "gamemechanics.h"
 #include <QtCore/qmath.h>
 
+// Для Qt4:
+/*
+ *#include <QPainter>
+ *#include <QLabel>
+ *#include <QMouseEvent>
+ */
+
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
 {
