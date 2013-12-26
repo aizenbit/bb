@@ -1,5 +1,7 @@
-﻿#include "ui.h"
-#include <QDialog>
+﻿// Для Qt4:
+//#include <QDialog>
+
+#include "ui.h"
 
 UI::UI(QWidget *parent)
     : QMainWindow(parent)

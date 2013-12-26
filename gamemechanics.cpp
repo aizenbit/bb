@@ -1,8 +1,5 @@
 #include "gamemechanics.h"
-#include <QPainter>
 #include <QtCore/qmath.h>
-#include <QLabel>
-#include <QMouseEvent>
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
@@ -36,8 +33,10 @@ void GameMechanics::mixArray()
     {
         x = abs((mas[rand() % 2] + emptyImagePos.x()) % pieceCount);
         y = abs((mas[rand() % 2] + emptyImagePos.x()) % pieceCount);
+
         if (!swapEmpty(x, emptyImagePos.y()))
             i--;
+
         if (!swapEmpty(emptyImagePos.x(), y))
             i--;
     }
@@ -143,13 +142,8 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    imagePressed(event->localPos());
-}
+    QPointF pos = event->localPos();
 
-//----------------------------------------
-
-void GameMechanics::imagePressed(QPointF pos)
-{
     if(typeOfPainting == pieces)
     {
         int x = (int)pos.x();
@@ -170,15 +164,15 @@ void GameMechanics::imagePressed(QPointF pos)
         }
 
     }
+
     if(typeOfPainting == fullImage && !winflag)
     {
         typeOfPainting = pieces;
         repaint();
     }
+
     if(typeOfPainting == fullImage && winflag)
-    {
         repaint();
-    }
 }
 
 //----------------------------------------

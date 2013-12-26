@@ -5,11 +5,18 @@
 #ifndef UI_H
 #define UI_H
 
-#include <QtGui>
-#include <QLabel>
-#include <QMainWindow>
-#include <QMenu>
-#include <QMenuBar>
+// Для Qt4:
+/*
+ *#include <QtGui>
+ *#include <QLabel>
+ *#include <QMainWindow>
+ *#include <QMenu>
+ *#include <QMenuBar>
+*/
+
+// Для Qt5:
+#include <QtGui/QtGui>
+#include <QtWidgets>
 
 #include "gamemechanics.h"
 #include "newgamewidget.h"
@@ -27,7 +34,7 @@ private:
      NewGameWidget *newGameWidget;//окошко "Новая игра"
      GameMechanics *gameMechanics;//основная механика игры.
      QLabel *youWinLable; //табличка "Вы выиграли"
-     friend class NewGameWidget; //делаем окошко "Новая игра" дружественным
+     friend class NewGameWidget;
 
 public:
     UI(QWidget *parent = 0);

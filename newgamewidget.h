@@ -5,16 +5,24 @@
 #ifndef NEWGAMEWIDGET_H
 #define NEWGAMEWIDGET_H
 
-#include <QWidget>
-#include <QtGui>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QFileDialog>
-#include <QRadioButton>
-#include <QSlider>
-#include <QLabel>
+// Для Qt4:
+/*
+ *#include <QWidget>
+ *#include <QtGui>
+ *#include <QHBoxLayout>
+ *#include <QVBoxLayout>
+ *#include <QPushButton>
+ *#include <QLineEdit>
+ *#include <QFileDialog>
+ *#include <QRadioButton>
+ *#include <QSlider>
+ *#include <QLabel>
+ */
+
+// Для Qt5:
+#include <QtGui/QtGui>
+#include <QtWidgets>
+
 #include "gamemechanics.h"
 
 class NewGameWidget : public QWidget

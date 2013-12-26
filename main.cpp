@@ -1,6 +1,9 @@
-#include "ui.h"
-#include <QApplication>
+// Для Qt4:
+//#include <QApplication>
+
 #include <time.h>
+#include "ui.h"
+
 
 int main(int argc, char *argv[])
 {

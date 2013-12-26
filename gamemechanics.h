@@ -5,9 +5,16 @@
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
-#include <QWidget>
-#include <QImage>
-#include <QPoint>
+// Для Qt4:
+/*
+ *#include <QWidget>
+ *#include <QImage>
+ *#include <QPoint>
+ */
+
+// Для Qt5:
+#include <QtGui/QtGui>
+#include <QtWidgets>
 
 class GameMechanics : public QWidget
 {
@@ -34,7 +41,6 @@ private:
     void mixArray(); //перемешивание кусочков
     bool swapEmpty(int, int); //перемещение кусочка с картинкой на пустое место
     bool checkArray(); //проверка на выигрыш
-    void imagePressed(QPointF); //обработка нажатия на картинку
 
 public:
     QString *imageName; //путь к картинке
