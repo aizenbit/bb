@@ -51,8 +51,8 @@ UI::UI(QWidget *parent)
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
     aboutMenu->addAction(tr("About the &game"),
-                        aboutTheGameLabel,
-                        SLOT(show()));
+                       this,
+                        SLOT(showAboutBox()));
     aboutMenu->addAction(tr("&Creators"),
                         creatorsLabel,
                         SLOT(show()));
@@ -86,3 +86,15 @@ UI::~UI()
 }
 
 //-----------------------------------------
+
+void UI::showAboutBox()
+{
+    QMessageBox aboutBox;
+    aboutBox.setWindowTitle("About");
+    aboutBox.setInformativeText("<H1><CENTER>bb</CENTER></H1>"
+                                "<H2><CENTER>Gem Puzzle</CENTER></H2>"
+                                "<CENTER>The best of the best!</CENTER>"
+                                "<CENTER>Very intresting game!</CENTER>"
+                                "<CENTER>Creators: aizenbit && den5509</CENTER>");
+    aboutBox.exec();
+}

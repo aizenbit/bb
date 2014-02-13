@@ -39,6 +39,9 @@ private:
 public:
     UI(QWidget *parent = 0);
     ~UI();
+
+public slots:
+    void showAboutBox();
 };
 
 #endif // UI_H
