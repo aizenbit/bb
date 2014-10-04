@@ -24,8 +24,9 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
 
     //----------------spinBox---------------------
     spinBox = new QSpinBox();
-    spinBox->setMinimum(2);
+    spinBox->setRange(2,20);
     spinBox->setValue(3);
+    spinBoxLabel = new QLabel(tr("Coose count of  peaces:"));
 
     //------------------connections---------------
     connect(okButton, SIGNAL(clicked()) ,this, SLOT(newGame()));
@@ -43,14 +44,16 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     mainLayout = new QVBoxLayout();
     buttonsLayout = new QHBoxLayout();
     pathLayout = new QHBoxLayout();
+    RBLayout = new QHBoxLayout();
     buttonsLayout->addWidget(okButton);
     buttonsLayout->addWidget(cancelButton);
     pathLayout->addWidget(pathLineEdit);
     pathLayout->addWidget(browseButton);
-    mainLayout->addWidget(sliderLabel);
+    RBLayout->addWidget(defaultImageRB);
+    RBLayout->addWidget(userImageRB);
+    mainLayout->addWidget(spinBoxLabel);
     mainLayout->addWidget(spinBox);
-    mainLayout->addWidget(defaultImageRB);
-    mainLayout->addWidget(userImageRB);
+    mainLayout->addLayout(RBLayout);
     mainLayout->addLayout(pathLayout);
     mainLayout->addLayout(buttonsLayout);
     this->setLayout(mainLayout);
@@ -110,7 +113,7 @@ NewGameWidget::~NewGameWidget()
     delete pathLineEdit;
     delete defaultImageRB;
     delete userImageRB;
-    delete sliderLabel;
+    delete spinBoxLabel;
     delete pathLayout;
     delete buttonsLayout;
     delete mainLayout;

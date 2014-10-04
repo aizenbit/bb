@@ -98,6 +98,6 @@ void UI::showErrorBox()
 {
     QMessageBox errorBox;
     errorBox.setWindowTitle(tr("Error"));
-    errorBox.setInformativeText(tr("Image is invalid! try to load another image."));
+    errorBox.setInformativeText(tr("Image is invalid! Try to load another image."));
     errorBox.exec();
 }

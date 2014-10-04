@@ -23,8 +23,7 @@ class NewGameWidget : public QWidget
     Q_OBJECT
 private:
     QVBoxLayout *mainLayout;//планировка виджетов
-    QHBoxLayout *pathLayout;
-    QHBoxLayout *buttonsLayout;
+    QHBoxLayout *pathLayout, *buttonsLayout, *RBLayout;
     QPushButton *okButton; //кнопки
     QPushButton *cancelButton;
     QPushButton *browseButton;
@@ -33,7 +32,7 @@ private:
     QRadioButton *userImageRB;
     GameMechanics *gameMechanics; //игровая механика
     QSpinBox *spinBox;
-    QLabel *sliderLabel; //надпись над ползунком
+    QLabel *spinBoxLabel;
 private slots:
     void newGame();
     void browse();
