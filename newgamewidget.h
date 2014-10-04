@@ -6,23 +6,24 @@
 #define NEWGAMEWIDGET_H
 
 // Для Qt4:
-/*
- *#include <QWidget>
- *#include <QtGui>
- *#include <QHBoxLayout>
- *#include <QVBoxLayout>
- *#include <QPushButton>
- *#include <QLineEdit>
- *#include <QFileDialog>
- *#include <QRadioButton>
- *#include <QSlider>
- *#include <QLabel>
- */
+
+ #include <QWidget>
+ #include <QtGui>
+ #include <QHBoxLayout>
+ #include <QVBoxLayout>
+ #include <QPushButton>
+ #include <QLineEdit>
+ #include <QFileDialog>
+ #include <QRadioButton>
+ #include <QSlider>
+ #include <QLabel>
+
 
 // Для Qt5:
+/*
 #include <QtGui/QtGui>
 #include <QtWidgets>
-
+*/
 #include "gamemechanics.h"
 
 class NewGameWidget : public QWidget
@@ -44,6 +45,8 @@ private:
 private slots:
     void newGame();
     void browse();
+signals:
+    void wrongImage();
 public:
     NewGameWidget(GameMechanics *, QWidget *parent = 0);
     ~NewGameWidget();

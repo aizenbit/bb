@@ -2,11 +2,11 @@
 #include <QtCore/qmath.h>
 
 // Для Qt4:
-/*
- *#include <QPainter>
- *#include <QLabel>
- *#include <QMouseEvent>
- */
+
+ #include <QPainter>
+ #include <QLabel>
+ #include <QMouseEvent>
+
 
 GameMechanics::GameMechanics(QWidget *parent) :
         QWidget(parent)
@@ -149,7 +149,7 @@ void GameMechanics::paintEvent(QPaintEvent *paintEvent)
 
 void GameMechanics::mousePressEvent(QMouseEvent *event)
 {
-    QPointF pos = event->localPos();
+    QPointF pos = event->posF();
 
     if(typeOfPainting == pieces)
     {

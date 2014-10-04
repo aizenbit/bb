@@ -80,7 +80,9 @@ void NewGameWidget::newGame()
 
 void NewGameWidget::browse()
 {
-    QString in = QFileDialog::getOpenFileName(0, tr("Open"), "","*.jpg *.jpeg *.png *.bmp");
+    QString in = QFileDialog::getOpenFileName(0, tr("Open"), "",tr("Images(*.jpg *.jpeg *.png *.bmp"
+                                                                   "*.gif *.pbm *.pgm *.ppm *.tiff "
+                                                                   "*.xbm *.xpm);;All Files(*.*)"));
 
     if (in.isEmpty())
         return;

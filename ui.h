@@ -6,17 +6,19 @@
 #define UI_H
 
 // Для Qt4:
-/*
- *#include <QtGui>
- *#include <QLabel>
- *#include <QMainWindow>
- *#include <QMenu>
- *#include <QMenuBar>
-*/
+
+ #include <QtGui>
+ #include <QLabel>
+ #include <QMainWindow>
+ #include <QMenu>
+ #include <QMenuBar>
+
 
 // Для Qt5:
+/*
 #include <QtGui/QtGui>
 #include <QtWidgets>
+*/
 
 #include "gamemechanics.h"
 #include "newgamewidget.h"
@@ -29,8 +31,6 @@ private:
      QMenu *gameMenu; //меню "Игра"
      QMenu *aboutMenu; //меню "Справка"
      QMenuBar *menuBar; //панель меню
-     QLabel *creatorsLabel; //окошко "Об авторах"
-     QLabel *aboutTheGameLabel;//окошко "Об игре"
      NewGameWidget *newGameWidget;//окошко "Новая игра"
      GameMechanics *gameMechanics;//основная механика игры.
      QLabel *youWinLable; //табличка "Вы выиграли"
@@ -42,6 +42,7 @@ public:
 
 public slots:
     void showAboutBox();
+    void showCreatorsBox();
 };
 
 #endif // UI_H
