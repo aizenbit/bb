@@ -26,7 +26,7 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     spinBox = new QSpinBox();
     spinBox->setRange(2,20);
     spinBox->setValue(3);
-    spinBoxLabel = new QLabel(tr("Coose count of  peaces:"));
+    spinBoxLabel = new QLabel(tr("Choose count of  peaces:"));
 
     //------------------connections---------------
     connect(okButton, SIGNAL(clicked()) ,this, SLOT(newGame()));
