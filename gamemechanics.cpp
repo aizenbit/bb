@@ -216,7 +216,7 @@ bool GameMechanics::checkArray()
 
 void GameMechanics::changeLevel(int level)
 {
-    if (level > 1 && level <6)
+    if (level > 1 && level <= 20)
     {
         for(int i = 0; i < pieceCount; i++)
                 delete[] array[i];

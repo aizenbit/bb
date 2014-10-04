@@ -13,6 +13,8 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     cancelButton = new QPushButton(tr("&Cancel"));
     browseButton = new QPushButton(tr("&Browse"));
 
+    okButton->setDisabled(true);
+
     //------------------RadioButtons-------------
     defaultImageRB = new QRadioButton(tr("&Default image"));
     userImageRB = new QRadioButton(tr("&User image"));
@@ -20,15 +22,10 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
 
     pathLineEdit = new QLineEdit();
 
-    //----------------slider---------------------
-    slider = new QSlider();
-    slider->setRange(3,5);
-    slider->setPageStep(1);
-    slider->setValue(3);
-    slider->setTickPosition(QSlider::TicksBelow);
-    slider->setOrientation(Qt::Horizontal);
-    sliderLabel = new QLabel(tr("<pre><CENTER>Choose level:</CENTER>\n"
-                                        "<CENTER>low\t     medium\thigh</CENTER><pre>"));
+    //----------------spinBox---------------------
+    spinBox = new QSpinBox();
+    spinBox->setMinimum(2);
+    spinBox->setValue(3);
 
     //------------------connections---------------
     connect(okButton, SIGNAL(clicked()) ,this, SLOT(newGame()));
@@ -38,7 +35,9 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     connect(userImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setEnabled(bool)));
     connect(defaultImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setDisabled(bool)));
     connect(userImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setEnabled(bool)));
-    connect(slider, SIGNAL(valueChanged(int)), gameMechanics, SLOT(changeLevel(int)));
+    connect(spinBox, SIGNAL(valueChanged(int)), gameMechanics, SLOT(changeLevel(int)));
+    connect(defaultImageRB, SIGNAL(clicked(bool)), okButton, SLOT(setEnabled(bool)));
+    connect(userImageRB, SIGNAL(clicked(bool)), okButton, SLOT(setDisabled(bool)));
 
     //------------------Layouts------------------
     mainLayout = new QVBoxLayout();
@@ -49,7 +48,7 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
     pathLayout->addWidget(pathLineEdit);
     pathLayout->addWidget(browseButton);
     mainLayout->addWidget(sliderLabel);
-    mainLayout->addWidget(slider);
+    mainLayout->addWidget(spinBox);
     mainLayout->addWidget(defaultImageRB);
     mainLayout->addWidget(userImageRB);
     mainLayout->addLayout(pathLayout);
@@ -80,9 +79,13 @@ void NewGameWidget::newGame()
 
 void NewGameWidget::browse()
 {
-    QString in = QFileDialog::getOpenFileName(0, tr("Open"), "",tr("Images(*.jpg *.jpeg *.png *.bmp"
-                                                                   "*.gif *.pbm *.pgm *.ppm *.tiff "
-                                                                   "*.xbm *.xpm);;All Files(*.*)"));
+    QString in = QFileDialog::getOpenFileName(0, tr("Open"), "",
+                                              tr("Images") +
+                                                 "(*.jpg *.jpeg *.png *.bmp"
+                                                 "*.gif *.pbm *.pgm *.ppm "
+                                                 "*.tiff *.xbm *.xpm);;" +
+                                              tr("All Files") +
+                                                 "(*.*)");
 
     if (in.isEmpty())
         return;
@@ -107,7 +110,6 @@ NewGameWidget::~NewGameWidget()
     delete pathLineEdit;
     delete defaultImageRB;
     delete userImageRB;
-    delete slider;
     delete sliderLabel;
     delete pathLayout;
     delete buttonsLayout;

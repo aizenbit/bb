@@ -5,18 +5,10 @@
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
-// Для Qt4:
-
  #include <QWidget>
  #include <QImage>
  #include <QPoint>
 
-
-// Для Qt5:
-/*
-#include <QtGui/QtGui>
-#include <QtWidgets>
-*/
 class GameMechanics : public QWidget
 {
     Q_OBJECT

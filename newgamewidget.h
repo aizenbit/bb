@@ -5,8 +5,6 @@
 #ifndef NEWGAMEWIDGET_H
 #define NEWGAMEWIDGET_H
 
-// Для Qt4:
-
  #include <QWidget>
  #include <QtGui>
  #include <QHBoxLayout>
@@ -18,12 +16,6 @@
  #include <QSlider>
  #include <QLabel>
 
-
-// Для Qt5:
-/*
-#include <QtGui/QtGui>
-#include <QtWidgets>
-*/
 #include "gamemechanics.h"
 
 class NewGameWidget : public QWidget
@@ -40,7 +32,7 @@ private:
     QRadioButton *defaultImageRB; //переключатель
     QRadioButton *userImageRB;
     GameMechanics *gameMechanics; //игровая механика
-    QSlider *slider; //ползунок выбора сложности
+    QSpinBox *spinBox;
     QLabel *sliderLabel; //надпись над ползунком
 private slots:
     void newGame();
