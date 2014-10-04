@@ -43,6 +43,7 @@ UI::UI(QWidget *parent)
     youWinLable->setWindowTitle(tr("YOU WIN!"));
     connect(gameMechanics,SIGNAL(win()),youWinLable,SLOT(show()));
 
+    connect(newGameWidget, SIGNAL(wrongImage()),this,SLOT(showErrorBox()));
 }
 
 //-----------------------------------------
@@ -61,7 +62,7 @@ UI::~UI()
 void UI::showAboutBox()
 {
     QMessageBox aboutBox;
-    aboutBox.setWindowTitle("About");
+    aboutBox.setWindowTitle(tr("About"));
     aboutBox.setInformativeText(tr(
                                     "<pre><H1><CENTER>bb</CENTER></H1>"
                                     "<H2><CENTER>Gem Puzzle</CENTER></H2>"
@@ -84,11 +85,19 @@ void UI::showAboutBox()
 void UI::showCreatorsBox()
 {
     QMessageBox creatorsBox;
-    creatorsBox.setWindowTitle("Creators");
-    creatorsBox.setInformativeText("<H1><CENTER>bb</CENTER></H1>"
+    creatorsBox.setWindowTitle(tr("Creators"));
+    creatorsBox.setInformativeText(tr("<H1><CENTER>bb</CENTER></H1>"
                                 "<H2><CENTER>Gem Puzzle</CENTER></H2>"
                                 "<CENTER>The best of the best!</CENTER>"
                                 "<CENTER>Very intresting game!</CENTER>"
-                                "<CENTER>Creators: aizenbit && den5509</CENTER>");
+                                "<CENTER>Creators: aizenbit && den5509</CENTER>"));
     creatorsBox.exec();
+}
+
+void UI::showErrorBox()
+{
+    QMessageBox errorBox;
+    errorBox.setWindowTitle(tr("Error"));
+    errorBox.setInformativeText(tr("Image is invalid! try to load another image."));
+    errorBox.exec();
 }

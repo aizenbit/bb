@@ -86,7 +86,12 @@ void NewGameWidget::browse()
 
     if (in.isEmpty())
         return;
-
+    QImage temp(in);
+    if (temp.format() == QImage::Format_Invalid)
+    {
+        wrongImage();
+        return;
+    }
     gameMechanics->imageName = &in;
     pathLineEdit->setText(*gameMechanics->imageName);
     newGame();

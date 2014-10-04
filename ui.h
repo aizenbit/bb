@@ -43,6 +43,7 @@ public:
 public slots:
     void showAboutBox();
     void showCreatorsBox();
+    void showErrorBox();
 };
 
 #endif // UI_H
