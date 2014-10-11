@@ -1,5 +1,4 @@
-﻿// Для Qt4:
-#include <QDialog>
+﻿#include <QDialog>
 
 #include "ui.h"
 
@@ -7,6 +6,7 @@ UI::UI(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setFixedSize(800,700);
+
     //------------------gameMechanics---------------
     gameMechanics = new GameMechanics();
     this->setCentralWidget(gameMechanics);
@@ -94,6 +94,8 @@ void UI::showCreatorsBox()
     creatorsBox.exec();
 }
 
+//-----------------------------------------
+
 void UI::showErrorBox()
 {
     QMessageBox errorBox;
@@ -101,3 +103,5 @@ void UI::showErrorBox()
     errorBox.setInformativeText(tr("Image is invalid! Try to load another image."));
     errorBox.exec();
 }
+
+//-----------------------------------------

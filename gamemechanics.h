@@ -1,13 +1,9 @@
-/*
- *  Игровая механика
- */
-
 #ifndef GAMEMECHANICS_H
 #define GAMEMECHANICS_H
 
- #include <QWidget>
- #include <QImage>
- #include <QPoint>
+#include <QWidget>
+#include <QImage>
+#include <QPoint>
 
 class GameMechanics : public QWidget
 {

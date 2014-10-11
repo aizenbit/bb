@@ -1,24 +1,11 @@
-/*
- *  Главное окно
- */
-
 #ifndef UI_H
 #define UI_H
 
-// Для Qt4:
-
- #include <QtGui>
- #include <QLabel>
- #include <QMainWindow>
- #include <QMenu>
- #include <QMenuBar>
-
-
-// Для Qt5:
-/*
-#include <QtGui/QtGui>
-#include <QtWidgets>
-*/
+#include <QtGui>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
 
 #include "gamemechanics.h"
 #include "newgamewidget.h"
