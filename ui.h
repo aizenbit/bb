@@ -1,11 +1,7 @@
 #ifndef UI_H
 #define UI_H
 
-#include <QtGui>
-#include <QLabel>
-#include <QMainWindow>
-#include <QMenu>
-#include <QMenuBar>
+#include <QtWidgets>
 
 #include "gamemechanics.h"
 #include "newgamewidget.h"

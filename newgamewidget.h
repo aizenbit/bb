@@ -1,16 +1,7 @@
 #ifndef NEWGAMEWIDGET_H
 #define NEWGAMEWIDGET_H
 
-#include <QWidget>
-#include <QtGui>
-#include <QHBoxLayout>
-#include <QVBoxLayout>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QFileDialog>
-#include <QRadioButton>
-#include <QSlider>
-#include <QLabel>
+#include <QtWidgets>
 
 #include "gamemechanics.h"
 

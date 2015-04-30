@@ -25,7 +25,7 @@ private:
     int pieceWidth;//длина кусочка
     int pieceHeight;//высота кусочка
     TypeOfPainting typeOfPainting;//что именно рисовать
-    void paintEvent(QPaintEvent *); //тут мы рисуем
+    void paintEvent(QPaintEvent *paintEvent); //тут мы рисуем
     void mousePressEvent(QMouseEvent *); //обработка нажатий мыши
     void mixArray(); //перемешивание кусочков
     bool swapEmpty(int, int); //перемещение кусочка с картинкой на пустое место

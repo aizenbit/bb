@@ -13,6 +13,8 @@ UI::UI(QWidget *parent)
 
     //------------------newGameWidget----------------
     newGameWidget = new NewGameWidget(gameMechanics);
+    connect(newGameWidget, SIGNAL(wrongImage()),
+            this, SLOT(showErrorBox()));
 
     //------------------gameMenu--------------------
     gameMenu = new QMenu(tr("&Game"));
@@ -20,12 +22,13 @@ UI::UI(QWidget *parent)
                         newGameWidget,
                         SLOT(show()));
     gameMenu->addAction(tr("Show &image"),
-                           gameMechanics,
-                           SLOT(showImage()));
+                        gameMechanics,
+                        SLOT(showImage()));
+
     //------------------aboutMenu--------------------
     aboutMenu = new QMenu(tr("&About"));
     aboutMenu->addAction(tr("About the &game"),
-                       this,
+                        this,
                         SLOT(showAboutBox()));
     aboutMenu->addAction(tr("&Creators"),
                         this,
@@ -41,9 +44,8 @@ UI::UI(QWidget *parent)
     youWinLable = new QLabel(tr("<H1><FONT COLOR=\"BLUE\">Congragulations!!!!!!</H1>"
                                 "<H1><FONT COLOR=\"RED\">YOU WIN!!!!</H2>"));
     youWinLable->setWindowTitle(tr("YOU WIN!"));
-    connect(gameMechanics,SIGNAL(win()),youWinLable,SLOT(show()));
-
-    connect(newGameWidget, SIGNAL(wrongImage()),this,SLOT(showErrorBox()));
+    connect(gameMechanics, SIGNAL(win()),
+            youWinLable, SLOT(show()));
 }
 
 //-----------------------------------------
@@ -90,7 +92,9 @@ void UI::showCreatorsBox()
                                 "<H2><CENTER>Gem Puzzle</CENTER></H2>"
                                 "<CENTER>The best of the best!</CENTER>"
                                 "<CENTER>Very intresting game!</CENTER>"
-                                "<CENTER>Creators: aizenbit && den5509</CENTER>"));
+                                "<CENTER>Creators: aizenbit && den5509</CENTER>"
+                                "<CENTER>Repo: <A HREF=https://github.com/aizenbit/bb>"
+                                        "https://github.com/aizenbit/bb</A></CENTER>"));
     creatorsBox.exec();
 }
 

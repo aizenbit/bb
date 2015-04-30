@@ -22,23 +22,36 @@ NewGameWidget::NewGameWidget(GameMechanics *gmMechanics, QWidget *parent) :
 
     pathLineEdit = new QLineEdit();
 
-    //----------------spinBox---------------------
+    //----------------SpinBox---------------------
     spinBox = new QSpinBox();
-    spinBox->setRange(2,20);
+    spinBox->setRange(2,8);
     spinBox->setValue(3);
     spinBoxLabel = new QLabel(tr("Choose count of  peaces:"));
 
     //------------------connections---------------
-    connect(okButton, SIGNAL(clicked()) ,this, SLOT(newGame()));
-    connect(cancelButton, SIGNAL(clicked()), this, SLOT(close()));
-    connect(browseButton, SIGNAL(clicked()), this, SLOT(browse()));
-    connect(defaultImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setDisabled(bool)));
-    connect(userImageRB, SIGNAL(clicked(bool)), browseButton, SLOT(setEnabled(bool)));
-    connect(defaultImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setDisabled(bool)));
-    connect(userImageRB, SIGNAL(clicked(bool)), pathLineEdit, SLOT(setEnabled(bool)));
-    connect(spinBox, SIGNAL(valueChanged(int)), gameMechanics, SLOT(changeLevel(int)));
-    connect(defaultImageRB, SIGNAL(clicked(bool)), okButton, SLOT(setEnabled(bool)));
-    connect(userImageRB, SIGNAL(clicked(bool)), okButton, SLOT(setDisabled(bool)));
+    connect(okButton, SIGNAL(clicked()),
+            this, SLOT(newGame()));
+    connect(cancelButton, SIGNAL(clicked()),
+            this, SLOT(close()));
+    connect(browseButton, SIGNAL(clicked()),
+            this, SLOT(browse()));
+    connect(spinBox, SIGNAL(valueChanged(int)),
+            gameMechanics, SLOT(changeLevel(int)));
+
+    connect(defaultImageRB, SIGNAL(clicked(bool)),
+            browseButton, SLOT(setDisabled(bool)));
+    connect(userImageRB, SIGNAL(clicked(bool)),
+            browseButton, SLOT(setEnabled(bool)));
+
+    connect(defaultImageRB, SIGNAL(clicked(bool)),
+            pathLineEdit, SLOT(setDisabled(bool)));
+    connect(userImageRB, SIGNAL(clicked(bool)),
+            pathLineEdit, SLOT(setEnabled(bool)));
+
+    connect(defaultImageRB, SIGNAL(clicked(bool)),
+            okButton, SLOT(setEnabled(bool)));
+    connect(userImageRB, SIGNAL(clicked(bool)),
+            okButton, SLOT(setDisabled(bool)));
 
     //------------------Layouts------------------
     mainLayout = new QVBoxLayout();
@@ -95,7 +108,7 @@ void NewGameWidget::browse()
     QImage temp(in);
     if (temp.format() == QImage::Format_Invalid)
     {
-        wrongImage();
+        emit wrongImage();
         return;
     }
     gameMechanics->imageName = &in;
@@ -118,7 +131,6 @@ NewGameWidget::~NewGameWidget()
     delete buttonsLayout;
     delete mainLayout;
     delete gameMechanics;
-
 }
 
 //----------------------------------------
